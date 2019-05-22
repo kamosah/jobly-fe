@@ -7,7 +7,7 @@ export default class CompanyListItem extends Component {
     const { description, handle, logo_url, name } = this.props;
     return (
       <li>
-        <div className="card mb-3" style={{ maxWidth: "540px" }}>
+        <div className="card mb-3" style={{ maxWidth: "80%" }}>
           <div className="row no-gutters">
             <div className="col-md-4">
               <img src={logo_url ? logo_url : imgDefault} className="card-img" alt={handle} />
