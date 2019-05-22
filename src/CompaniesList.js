@@ -1,28 +1,35 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import JoblyApi from './JoblyApi';
 import CompanyListItem from './CompanyListItem';
-import { Link } from 'react-router-dom';
+import SearchForm from './SearchForm';
+import Spinner from './Spinner';
 
 export default class CompaniesList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      companyList: []
+      companyList: [],
+      loaded: false
     }
   }
 
   async componentDidMount() {
-    console.log("GETTING COMPANIES");
-    let res = await JoblyApi.request('companies', {}, "get");
-    console.log(res.companies.length);
-    this.setState({companyList: res.companies})
+    let { companies } = await JoblyApi.request('companies', {}, "get");
+    this.setState({ companyList: companies, loaded: true })
+  }
+
+  search = async (data) => {
+    this.setState({ loaded: false });
+    let { companies } = await JoblyApi.request('companies', {search: data.term}, "get");
+    this.setState({ companyList: companies, loaded: true });
   }
 
   renderCompanyList = () => {
     return (
       <ul>
         {this.state.companyList.map(c => (
-            <Link key={ c.handle } to={`/companies/${c.handle}`}><CompanyListItem {...c}/></Link>
+          <Link key={c.handle} to={`/companies/${c.handle}`}><CompanyListItem {...c} /></Link>
         ))}
       </ul>
     )
@@ -30,9 +37,10 @@ export default class CompaniesList extends Component {
 
   render() {
     return (
-      <div>
-        <h1>CompaniesList</h1>
-        {this.renderCompanyList()}
+      <div className="d-flex flex-column justify-content-start align-items-center">
+        <h2 className="m-4">Companies List</h2>
+        <SearchForm search={this.search}/>
+        {this.state.loaded ? this.renderCompanyList() : <Spinner />}
       </div>
     )
   }

@@ -6,8 +6,8 @@ export default class CompanyListItem extends Component {
   render() {
     const { description, handle, logo_url, name } = this.props;
     return (
-      <li>
-        <div className="card mb-3" style={{ maxWidth: "80%" }}>
+
+        <li className="card mb-3" style={{ maxWidth: "80%" }}>
           <div className="row no-gutters">
             <div className="col-md-4">
               <img src={logo_url ? logo_url : imgDefault} className="card-img" alt={handle} />
@@ -19,8 +19,8 @@ export default class CompanyListItem extends Component {
               </div>
             </div>
           </div>
-        </div>
-      </li>
+        </li>
+
     )
   }
 }
