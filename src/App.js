@@ -36,7 +36,7 @@ function App() {
             <Route exact path="/profile/edit" render={() => <EditProfileForm/>}/>
             <Route exact path="/profile" render={() => <ProfilePage/>}/>
             <Route exact path="/signup" render={() => <SignupForm/>}/>
-            <Route exact path="/login" render={() => <LoginForm/>}/>
+            <Route exact path="/login" render={(rtProps) => <LoginForm {...rtProps}/>}/>
             <Route exact path="/" render={() => <HomePage />}/>
             <Route render={() => <NotFound />}/>
           </Switch>
