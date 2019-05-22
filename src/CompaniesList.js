@@ -12,16 +12,20 @@ export default class CompaniesList extends Component {
       companyList: [],
       loaded: false
     }
-  }
+  } f
 
   async componentDidMount() {
-    let { companies } = await JoblyApi.request('companies', {}, "get");
-    this.setState({ companyList: companies, loaded: true })
+    try {
+      let { companies } = await JoblyApi.request('companies', {}, "get");
+      this.setState({ companyList: companies, loaded: true })
+    } catch (e) {
+      this.props.history.push('/login');
+    }
   }
 
   search = async (data) => {
     this.setState({ loaded: false });
-    let { companies } = await JoblyApi.request('companies', {search: data.term}, "get");
+    let { companies } = await JoblyApi.request('companies', { search: data.term }, "get");
     this.setState({ companyList: companies, loaded: true });
   }
 
@@ -39,7 +43,7 @@ export default class CompaniesList extends Component {
     return (
       <div className="d-flex flex-column justify-content-start align-items-center">
         <h2 className="m-4">Companies List</h2>
-        <SearchForm search={this.search}/>
+        <SearchForm search={this.search} />
         {this.state.loaded ? this.renderCompanyList() : <Spinner />}
       </div>
     )
