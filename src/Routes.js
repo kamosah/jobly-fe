@@ -23,7 +23,7 @@ export default class Routes extends Component {
         <Route exact path="/companies/add" render={() => <AddCompanyForm />} ensureLoggedIn={this.props.ensureLoggedIn} />
         <Route exact path="/companies" render={(rtProps) => <CompaniesList ensureLoggedIn={this.props.ensureLoggedIn} {...rtProps} />} />
         <Route exact path="/jobs" render={() => <JobsList ensureLoggedIn={this.props.ensureLoggedIn} />} />
-        <Route exact path="/profile/edit" render={() => <EditProfileForm ensureLoggedIn={this.props.ensureLoggedIn} />} />
+        <Route exact path="/profile/edit" render={(rtProps) => <EditProfileForm ensureLoggedIn={this.props.ensureLoggedIn} {...rtProps} />} />
         <Route exact path="/profile" render={() => <ProfilePage ensureLoggedIn={this.props.ensureLoggedIn} />} />
         <Route exact path="/register" render={(rtProps) => <RegisterForm {...rtProps} ensureLoggedIn={this.props.ensureLoggedIn} />} />
         <Route exact path="/login" render={(rtProps) => <LoginForm {...rtProps} ensureLoggedIn={this.props.ensureLoggedIn} />} />

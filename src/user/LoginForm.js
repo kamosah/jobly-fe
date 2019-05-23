@@ -22,14 +22,16 @@ export default class LoginForm extends Component {
     e.preventDefault();
     try {
       let { username, password } = this.state;
-      let { token } = await JoblyApi.request('login', { username, password }, "post");
+      let { user, token } = await JoblyApi.request('login', { username, password }, "post");
       if (token) {
+        const { username } = user;
         localStorage.setItem("token", token);
+        localStorage.setItem("username", username);
         this.props.history.push('/companies');
       } else {
         throw new Error("Invalid Credentials");
       }
-    } catch(e) {
+    } catch (e) {
       this.setState({ isError: true, error: e });
     }
   }
@@ -39,7 +41,7 @@ export default class LoginForm extends Component {
       <div>
         <h1 className="m-4 text-center">Login</h1>
         {this.state.isError ? <Alert error={this.state.error} /> : null}
-        <form onSubmit={this.handleSubmit}  className="mx-auto" style={{maxWidth: "480px"}}>
+        <form onSubmit={this.handleSubmit} className="mx-auto" style={{ maxWidth: "480px" }}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
