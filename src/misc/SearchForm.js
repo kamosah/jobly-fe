@@ -22,13 +22,14 @@ export default class SearchForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="m-4 form-inline d-flex justify-content-center">
         <input
+          className="form-control col-6"
           name="term"
           value={this.state.term}
           onChange={this.handleChange}
           required />
-        <button>Search</button>
+        <button className="ml-2 btn btn-primary">Search</button>
       </form>
     );
   }

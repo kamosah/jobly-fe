@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
-import JoblyApi from './JoblyApi';
+import JoblyApi from '../helpers/joblyApi';
 import CompanyListItem from './CompanyListItem';
-import SearchForm from './SearchForm';
-import Spinner from './Spinner';
+import SearchForm from '../misc/SearchForm';
+import Spinner from '../misc/Spinner';
 
 export default class CompaniesList extends Component {
   constructor(props) {
@@ -12,7 +11,7 @@ export default class CompaniesList extends Component {
       companyList: [],
       loaded: false
     }
-  } f
+  }
 
   async componentDidMount() {
     try {
@@ -31,9 +30,9 @@ export default class CompaniesList extends Component {
 
   renderCompanyList = () => {
     return (
-      <ul>
+      <ul className="mb-5 p-0 mx-auto" style={{maxWidth: "920px"}}>
         {this.state.companyList.map(c => (
-          <Link key={c.handle} to={`/companies/${c.handle}`}><CompanyListItem {...c} /></Link>
+          <CompanyListItem key={c.handle} {...c} />
         ))}
       </ul>
     )
@@ -41,8 +40,8 @@ export default class CompaniesList extends Component {
 
   render() {
     return (
-      <div className="d-flex flex-column justify-content-start align-items-center">
-        <h2 className="m-4">Companies List</h2>
+      <div className="text-center">
+        <h2 className="mt-4">Companies</h2>
         <SearchForm search={this.search} />
         {this.state.loaded ? this.renderCompanyList() : <Spinner />}
       </div>

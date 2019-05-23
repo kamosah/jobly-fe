@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import JoblyApi from './JoblyApi';
+import JoblyApi from '../helpers/joblyApi';
 import JobListItem from './JobListItem';
-import { Link } from 'react-router-dom';
-import Spinner from './Spinner';
-import SearchForm from './SearchForm';
+import Spinner from '../misc/Spinner';
+import SearchForm from '../misc/SearchForm';
 
 export default class JobsList extends Component {
   constructor(props) {
@@ -32,9 +31,9 @@ export default class JobsList extends Component {
 
   renderJobList = () => {
     return (
-      <ul>
+      <ul className="mb-5 p-0 mx-auto" style={{maxWidth: "460px"}}>
         {this.state.jobs.map(j => (
-          <Link key={j.id} to={`/jobs/${j.id}`}><JobListItem {...j} /></Link>
+          <JobListItem key={j.id} {...j} />
         ))}
       </ul>
     );
@@ -42,9 +41,9 @@ export default class JobsList extends Component {
 
   render() {
     return (
-      <div className="d-flex flex-column justify-content-start align-items-center">
-        {this.props.jobs ? null : <h2 className="m-4">Jobs List</h2>}
-        <SearchForm search={this.search}/>
+      <div className="text-center">
+        {this.props.jobs ? null : <h2 className="mt-4">Jobs</h2>}
+        {this.props.jobs ? null : <SearchForm search={this.search}/>}
         {this.state.loaded ? this.renderJobList() : <Spinner />}
       </div>
     )
