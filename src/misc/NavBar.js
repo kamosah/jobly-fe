@@ -7,7 +7,9 @@ export default class NavBar extends Component {
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
-            <NavLink exact to="/" className="navbar-brand text-light">Jobly</NavLink>
+            <NavLink exact to="/" className="navbar-brand text-light">
+              <img src="https://res.cloudinary.com/dxklaorw6/image/upload/v1558640373/joblyicon.png" alt="jobly-logo-sm" style={{width: "70px"}} />
+            </NavLink>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -38,7 +40,9 @@ export default class NavBar extends Component {
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
-            <NavLink exact to="/" className="navbar-brand text-light">Jobly</NavLink>
+            <NavLink exact to="/" className="navbar-brand text-light">
+              <img src="https://res.cloudinary.com/dxklaorw6/image/upload/v1558640373/joblyicon.png" alt="jobly-logo-sm" style={{width: "70px"}} />
+            </NavLink>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>

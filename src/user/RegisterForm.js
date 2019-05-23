@@ -56,6 +56,7 @@ export default class RegisterForm extends Component {
               type="text"
               onChange={this.handleChange}
               name="username"
+              required
             />
           </div>
           <div className="form-group">
@@ -66,6 +67,7 @@ export default class RegisterForm extends Component {
               type="password"
               onChange={this.handleChange}
               name="password"
+              required
             />
           </div>
           <div className="form-group">
