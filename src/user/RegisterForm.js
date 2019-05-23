@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-// import JoblyApi from '../helpers/joblyApi';
+import JoblyApi from '../helpers/joblyApi';
+import Alert from '../misc/Alert';
 
 export default class RegisterForm extends Component {
   constructor(props) {
@@ -10,8 +11,14 @@ export default class RegisterForm extends Component {
       first_name: "",
       last_name: "",
       email: "",
-      photo_url: ""
+      photo_url: "",
+      isError: false,
+      error: {}
     }
+  }
+
+  componentDidMount() {
+    this.props.ensureLoggedIn();
   }
 
   handleChange = (e) => {
@@ -20,15 +27,27 @@ export default class RegisterForm extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO
+    const { username, password, first_name, last_name, email, photo_url } = this.state;
+    try {
+      let { token } = await JoblyApi.request('users', { username, password, first_name, last_name, email, photo_url }, "post");
+      if (token) {
+        localStorage.setItem("token", token);
+        this.props.history.push('/');
+      } else {
+        throw new Error("Invalid Input");
+      }
+      this.setState({ isError: false });
+    } catch (e) {
+      this.setState({ isError: true, error: e })
+    }
   }
 
   render() {
     return (
       <div>
         <h1 className="m-4 text-center">Register</h1>
-        <form onSubmit={this.handleSubmit}  className="mb-5 mx-auto" style={{maxWidth: "480px"}}>
-          {/******************************/}
+        {this.state.isError ? <Alert error={this.state.error} /> : null}
+        <form onSubmit={this.handleSubmit} className="mb-5 mx-auto" style={{ maxWidth: "480px" }}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
@@ -39,7 +58,6 @@ export default class RegisterForm extends Component {
               name="username"
             />
           </div>
-          {/******************************/}
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -50,7 +68,6 @@ export default class RegisterForm extends Component {
               name="password"
             />
           </div>
-          {/******************************/}
           <div className="form-group">
             <label htmlFor="first_name">First Name</label>
             <input
@@ -61,7 +78,6 @@ export default class RegisterForm extends Component {
               name="first_name"
             />
           </div>
-          {/******************************/}
           <div className="form-group">
             <label htmlFor="last_name">Last Name</label>
             <input
@@ -72,7 +88,6 @@ export default class RegisterForm extends Component {
               name="last_name"
             />
           </div>
-          {/******************************/}
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -83,7 +98,6 @@ export default class RegisterForm extends Component {
               name="email"
             />
           </div>
-          {/******************************/}
           <div className="form-group">
             <label htmlFor="photo_url">Photo URL</label>
             <input
@@ -94,7 +108,6 @@ export default class RegisterForm extends Component {
               name="photo_url"
             />
           </div>
-          {/******************************/}
           <div className="form-group">
             <button className="btn btn-primary">Submit</button>
           </div>

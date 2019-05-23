@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
 export default class NotFound extends Component {
+  componentDidMount() {
+    this.props.ensureLoggedIn();
+  }
   render() {
     const containerStyles = {
       marginTop: "80px",

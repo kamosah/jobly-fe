@@ -14,6 +14,7 @@ export default class CompaniesList extends Component {
   }
 
   async componentDidMount() {
+    this.props.ensureLoggedIn();
     try {
       let { companies } = await JoblyApi.request('companies', {}, "get");
       this.setState({ companyList: companies, loaded: true })

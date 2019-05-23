@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
 export default class AddCompanyForm extends Component {
+  componentDidMount() {
+    this.props.ensureLoggedIn();
+  }
   render() {
     return (
       <div>

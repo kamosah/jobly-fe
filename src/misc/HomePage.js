@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 
 export default class HomePage extends Component {
+  componentDidMount() {
+    this.props.ensureLoggedIn();
+  }
   render() {
     const contentStyles = {
       padding: "30px 100px",
@@ -18,9 +21,9 @@ export default class HomePage extends Component {
       <div className="landing d-flex justify-content-center align-items-center">
         <div className="text-center mx-auto" style={contentStyles}>
           <h1 className="mb-5 mx-auto" style={headerStyles}>Jobly<i className="fas fa-briefcase ml-4"></i></h1>
-          <Link to={`/jobs`}>
-            <button className="btn btn-primary btn-lg mx-auto">See Jobs</button>
-          </Link>
+          {!localStorage.getItem('token') ? (<Link to={`/login`}>
+            <button className="btn btn-primary btn-lg mx-auto">Login</button>
+          </Link>) : null }
         </div>
       </div>
     )

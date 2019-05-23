@@ -14,6 +14,7 @@ export default class LoginForm extends Component {
   }
 
   handleChange = (e) => {
+    this.props.ensureLoggedIn();
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -26,10 +27,10 @@ export default class LoginForm extends Component {
         localStorage.setItem("token", token);
         this.props.history.push('/companies');
       } else {
-        throw new Error("Invalid username and/or password", 401);
+        throw new Error("Invalid Credentials");
       }
-    } catch(err) {
-      this.setState({ isError: true, error: err });
+    } catch(e) {
+      this.setState({ isError: true, error: e });
     }
   }
 

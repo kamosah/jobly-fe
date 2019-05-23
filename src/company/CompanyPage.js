@@ -16,6 +16,7 @@ export default class CompanyPage extends Component {
 
   async componentDidMount() {
     let res = await JoblyApi.request(`companies/${this.props.match.params.handle}`, {}, "get");
+    this.props.ensureLoggedIn();
     this.setState({ company: res.company, loaded: true });
   }
 
@@ -45,7 +46,7 @@ export default class CompanyPage extends Component {
           <p>{description}</p>
           <p style={{fontSize: "0.9rem", color: "#888"}}>Employees: {num_employees}</p>
         </div>
-        <JobsList jobs={jobs} />
+        <JobsList ensureLoggedIn={this.props.ensureLoggedIn} jobs={jobs} />
       </div>
     );
   }
