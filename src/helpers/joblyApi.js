@@ -2,8 +2,8 @@ import axios from 'axios';
 
 export default class JoblyApi {
   static async request(endpoint, paramsOrData = {}, verb = "get") {
-    paramsOrData._token = localStorage.getItem("token");
     console.debug("API Call:", endpoint, paramsOrData, verb);
+    paramsOrData._token = localStorage.getItem("token");
     try {
       return (await axios({
         method: verb,

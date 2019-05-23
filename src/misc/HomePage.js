@@ -17,9 +17,9 @@ export default class HomePage extends Component {
     return (
       <div className="landing d-flex justify-content-center align-items-center">
         <div className="text-center mx-auto" style={contentStyles}>
-          <h1 className="mb-5 mx-auto" style={headerStyles}>Jobly<i className="fas fa-briefcase ml-5"></i></h1>
+          <h1 className="mb-5 mx-auto" style={headerStyles}>Jobly<i className="fas fa-briefcase ml-4"></i></h1>
           <Link to={`/jobs`}>
-            <button className="btn btn-primary btn-lg mx-auto" style={{ maxWidth: "90px" }}>Jobs</button>
+            <button className="btn btn-primary btn-lg mx-auto">See Jobs</button>
           </Link>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import JoblyApi from '../helpers/joblyApi';
+import Alert from '../misc/Alert';
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -7,7 +8,8 @@ export default class LoginForm extends Component {
     this.state = {
       username: "",
       password: "",
-      error: false
+      isError: false,
+      error: {}
     }
   }
 
@@ -17,14 +19,17 @@ export default class LoginForm extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    let { username, password } = this.state;
-    let { token } = await JoblyApi.request('login', { username, password }, "post");
-    if (token) {
-      this.setState({ error: false })
-      localStorage.setItem("token", token);
-      this.props.history.push('/companies');
-    } else {
-      this.setState({ error: true })
+    try {
+      let { username, password } = this.state;
+      let { token } = await JoblyApi.request('login', { username, password }, "post");
+      if (token) {
+        localStorage.setItem("token", token);
+        this.props.history.push('/companies');
+      } else {
+        throw new Error("Invalid username and/or password", 401);
+      }
+    } catch(err) {
+      this.setState({ isError: true, error: err });
     }
   }
 
@@ -32,6 +37,7 @@ export default class LoginForm extends Component {
     return (
       <div>
         <h1 className="m-4 text-center">Login</h1>
+        {this.state.isError ? <Alert error={this.state.error} /> : null}
         <form onSubmit={this.handleSubmit}  className="mx-auto" style={{maxWidth: "480px"}}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
@@ -41,6 +47,7 @@ export default class LoginForm extends Component {
               type="text"
               onChange={this.handleChange}
               name="username"
+              required
             />
           </div>
           <div className="form-group">
@@ -51,13 +58,13 @@ export default class LoginForm extends Component {
               type="password"
               onChange={this.handleChange}
               name="password"
+              required
             />
           </div>
           <div className="form-group">
             <button className="btn btn-primary">Submit</button>
           </div>
         </form>
-        {this.state.error ? "username or password incorrect" : ""}
       </div>
     )
   }

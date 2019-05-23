@@ -20,7 +20,7 @@ export default class Routes extends Component {
     return (
         <Switch>
           <Route exact path="/" render={() => <HomePage />} />
-          <div className="container">
+          <Route className="container">
             <Route exact path="/companies/edit/:handle" render={(rtProps) => <EditCompanyForm {...rtProps} />} />
             <Route exact path="/companies/:handle" render={(rtProps) => <CompanyPage {...rtProps} />} />
             <Route exact path="/companies/add" render={() => <AddCompanyForm />} />
@@ -33,8 +33,8 @@ export default class Routes extends Component {
             <Route exact path="/profile" render={() => <ProfilePage />} />
             <Route exact path="/register" render={() => <RegisterForm />} />
             <Route exact path="/login" render={(rtProps) => <LoginForm {...rtProps} />} />
-          </div>
-          <Route render={() => <NotFound />} />
+          </Route>
+          <Route exact render={() => <NotFound />} />
         </Switch>
     );
   }

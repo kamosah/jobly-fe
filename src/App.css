@@ -7,3 +7,10 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+form input {
+  height: auto!important;
+  padding: 8px!important;
+  font-size: 1.2rem!important;
+  border: 1px solid #d8d8d8!important;
+}
