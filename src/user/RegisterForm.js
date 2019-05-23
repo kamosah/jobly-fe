@@ -29,9 +29,10 @@ export default class RegisterForm extends Component {
     e.preventDefault();
     const { username, password, first_name, last_name, email, photo_url } = this.state;
     try {
-      let { token } = await JoblyApi.request('users', { username, password, first_name, last_name, email, photo_url }, "post");
+      let { token, user } = await JoblyApi.request('users', { username, password, first_name, last_name, email, photo_url }, "post");
       if (token) {
         localStorage.setItem("token", token);
+        localStorage.setItem("username", user.username);
         this.props.history.push('/');
       } else {
         throw new Error("Invalid Input");
