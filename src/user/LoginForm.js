@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import JoblyApi from '../helpers/joblyApi';
 import Alert from '../misc/Alert';
+import "./LoginForm.css";
 
+/**
+ * 
+ */
 export default class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -13,11 +17,13 @@ export default class LoginForm extends Component {
     }
   }
 
+  /** */
   handleChange = (e) => {
     this.props.ensureLoggedIn();
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  /** */
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -27,7 +33,7 @@ export default class LoginForm extends Component {
         const { username } = user;
         localStorage.setItem("token", token);
         localStorage.setItem("username", username);
-        this.props.history.push('/companies');
+        this.props.history.push('/jobs');
       } else {
         throw new Error("Invalid Credentials");
       }
@@ -41,7 +47,7 @@ export default class LoginForm extends Component {
       <div>
         <h1 className="m-4 text-center">Login</h1>
         {this.state.isError ? <Alert error={this.state.error} /> : null}
-        <form onSubmit={this.handleSubmit} className="mx-auto" style={{ maxWidth: "480px" }}>
+        <form onSubmit={this.handleSubmit} className="login-form mx-auto">
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
@@ -69,6 +75,6 @@ export default class LoginForm extends Component {
           </div>
         </form>
       </div>
-    )
+    );
   }
 }

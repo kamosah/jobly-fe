@@ -1,0 +1,17 @@
+.navbar {
+  min-height: 67px;
+  padding: 7px 25px!important;
+}
+
+.container-fluid {
+  margin: 0;
+  padding: 0;
+}
+
+.nav-logo {
+  width: 70px;
+}
+
+.nav-item {
+  font-size: 1rem;
+}

@@ -1,0 +1,19 @@
+.company-page-logo {
+  max-width: 120px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px #333;
+}
+
+.company-jumbo {
+  max-width: 900px;
+}
+
+.company-desc {
+  font-size: 1rem;
+}
+
+.num-employees {
+  font-size: 0.9rem;
+  color: #888;
+}

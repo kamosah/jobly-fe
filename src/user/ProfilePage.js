@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import JoblyApi from '../helpers/joblyApi';
 import Alert from '../misc/Alert';
+import "./ProfilePage.css";
 
 let imgDefault = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS32fZtSx6C6gMJGp95NN5O09FtFIphVAeAVg11q8yD33TWA9Fu";
 
+/**
+ * 
+ */
 export default class ProfilePage extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +23,7 @@ export default class ProfilePage extends Component {
     }
   }
 
+  /** */
   async componentDidMount() {
     this.props.ensureLoggedIn();
     try {
@@ -31,52 +36,63 @@ export default class ProfilePage extends Component {
     }
   }
 
+  /** */
   defaultImgOnErr(e) {
     e.target.src = imgDefault;
   }
 
+  /** */
   updateProfile = async (e) => {
     e.preventDefault();
     try {
       const { first_name, last_name, email, photo_url } = this.state;
       let username = localStorage.getItem('username');
       await JoblyApi.request(`users/${username}`, { first_name, last_name, email, photo_url }, 'patch');
-      this.setState({editing: false});
+      this.setState({ editing: false });
     } catch (e) {
       this.setState({ isError: true, error: e });
     }
   }
 
+  /** */
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  /** */
   editProfile = () => {
-    this.setState({editing: !this.state.editing});
+    this.setState({ editing: !this.state.editing });
   }
 
-  render() {
+  /** */
+  renderProfileContent() {
     const { username, first_name, last_name, email, photo_url } = this.state;
-    let profileContent = (
+    return (
       <div>
-        <div className="jumbotron mt-5 mx-auto p-4 text-center" style={{ maxWidth: "900px" }}>
-          <h2 className="mb-4">{username}</h2>
+        <div className="user-jumbo jumbotron mt-5 mx-auto p-4 text-center">
+          <h2 className="mb-3">{username}</h2>
           <img
+            className="user-img"
             src={photo_url ? photo_url : imgDefault}
             alt={first_name}
             onError={this.defaultImgOnErr}
           />
           <hr className="my-4" />
-          <p>{`${first_name} ${last_name}`}</p>
-          <p>{email}</p>
-          <button className="btn btn-primary btn-sm mt-2" onClick={this.editProfile}>Edit Info</button>
+          <div className="user-info">{`${first_name} ${last_name}`}</div>
+          <div className="user-info mb-4">{email}</div>
+          <button className="btn btn-primary btn-sm mb-2" onClick={this.editProfile}>Edit Info</button>
         </div>
       </div>
     );
-    let editForm = (
+  }
+
+  /** */
+  renderEditForm() {
+    const { first_name, last_name, email, photo_url } = this.state;
+    return (
       <div>
-        <h1 className="m-4 text-center">Edit Info</h1>
-        <form onSubmit={this.updateProfile} className="mb-5 mx-auto" style={{ maxWidth: "480px" }}>
+        <h2 className="mt-4 mb-3 text-center">Edit Info</h2>
+        <form onSubmit={this.updateProfile} className="edit-user-form mb-5 mx-auto">
           <div className="form-group">
             <label htmlFor="first_name">First Name</label>
             <input
@@ -122,21 +138,22 @@ export default class ProfilePage extends Component {
             />
           </div>
           <div className="form-group">
-            <button className="btn btn-primary">Update</button>
-            <br/>
-            <span className="btn btn-primary btn-sm mt-2" onClick={this.editProfile}>Cancel</span>
+            <button className="btn btn-primary mt-1 mb-1 mx-auto">Update</button>
+            <br />
+            <span className="btn btn-secondary btn-sm mt-3" onClick={this.editProfile}>Cancel</span>
           </div>
         </form>
       </div>
-
     );
+  }
+
+  render() {
     return (
       <div>
         {this.state.isError ? <Alert error={this.state.error} /> : null}
-        {this.state.editing ? editForm : profileContent}
+        {this.state.editing ? this.renderEditForm() : this.renderProfileContent()}
       </div>
     );
-      
   }
 }
 

@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import formatSalary from '../helpers/formatSalary';
+import "./JobListItem"
 
+/**
+ * 
+ */
 export default class JobListItem extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +16,7 @@ export default class JobListItem extends Component {
     }
   }
 
+  /** */
   applyClick = () => {
     this.props.handleApply(this.props.id);
     this.setState({ applyState: "applied" });
@@ -31,14 +36,14 @@ export default class JobListItem extends Component {
                     <span>Company: </span>
                     <Link key={id} to={`/companies/${company_handle}`}>{name}</Link>
                   </span>
-                  ) : null }
-                {name ? <br/> : null }
+                ) : null}
+                {name ? <br /> : null}
                 Salary: {formatSalary(salary)}
-                <br/>
+                <br />
                 Equity: {equity}
               </p>
               {this.state.applyState ? (
-                <button className="btn btn-muted btn-sm" style={{pointerEvents: "none"}}>Applied</button>
+                <button className="applyBtn btn btn-muted btn-sm">Applied</button>
               ) : (
                 <button className="btn btn-primary btn-sm" onClick={this.applyClick}>Apply</button>
               )}

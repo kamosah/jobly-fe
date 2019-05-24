@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 export default function formatSalary(num) {
   let numStr = num.toString();
   let output = "";

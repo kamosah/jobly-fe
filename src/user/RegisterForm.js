@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import JoblyApi from '../helpers/joblyApi';
 import Alert from '../misc/Alert';
+import "./RegisterForm.css";
 
+/**
+ * 
+ */
 export default class RegisterForm extends Component {
   constructor(props) {
     super(props);
@@ -17,14 +21,17 @@ export default class RegisterForm extends Component {
     }
   }
 
+  /** */
   componentDidMount() {
     this.props.ensureLoggedIn();
   }
 
+  /** */
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  /** */
   handleSubmit = async (e) => {
     e.preventDefault();
     const { username, password, first_name, last_name, email, photo_url } = this.state;
@@ -33,12 +40,13 @@ export default class RegisterForm extends Component {
       if (token) {
         localStorage.setItem("token", token);
         localStorage.setItem("username", user.username);
-        this.props.history.push('/');
+        this.props.history.push('/jobs');
       } else {
         throw new Error("Invalid Input");
       }
       this.setState({ isError: false });
     } catch (e) {
+      console.log(e)
       this.setState({ isError: true, error: e })
     }
   }
@@ -48,7 +56,7 @@ export default class RegisterForm extends Component {
       <div>
         <h1 className="m-4 text-center">Register</h1>
         {this.state.isError ? <Alert error={this.state.error} /> : null}
-        <form onSubmit={this.handleSubmit} className="mb-5 mx-auto" style={{ maxWidth: "480px" }}>
+        <form onSubmit={this.handleSubmit} className="register-form mb-5 mx-auto">
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input

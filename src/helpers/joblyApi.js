@@ -1,6 +1,11 @@
 import axios from 'axios';
 
+/**
+ * 
+ */
 export default class JoblyApi {
+
+  /** */
   static async request(endpoint, paramsOrData = {}, verb = "get") {
     console.debug("API Call:", endpoint, paramsOrData, verb);
     paramsOrData._token = localStorage.getItem("token");
@@ -20,6 +25,8 @@ export default class JoblyApi {
       throw Array.isArray(message) ? message : [message];
     }
   }
+
+  /** */
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
     return res.company;

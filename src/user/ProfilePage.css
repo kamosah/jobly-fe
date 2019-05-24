@@ -1,0 +1,15 @@
+.user-jumbo {
+  max-width: 440px;
+}
+
+.user-img {
+  max-width: 140px;
+}
+
+.user-info {
+  font-size: 1.2rem;
+}
+
+.edit-user-form {
+  max-width: 480px;
+}

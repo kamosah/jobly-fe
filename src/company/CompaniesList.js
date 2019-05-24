@@ -3,7 +3,11 @@ import JoblyApi from '../helpers/joblyApi';
 import CompanyListItem from './CompanyListItem';
 import SearchForm from '../misc/SearchForm';
 import Spinner from '../misc/Spinner';
+import "./CompaniesList.css";
 
+/**
+ * 
+ */
 export default class CompaniesList extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +17,7 @@ export default class CompaniesList extends Component {
     }
   }
 
+  /** */
   async componentDidMount() {
     this.props.ensureLoggedIn();
     try {
@@ -23,15 +28,17 @@ export default class CompaniesList extends Component {
     }
   }
 
+  /** */
   search = async (data) => {
     this.setState({ loaded: false });
     let { companies } = await JoblyApi.request('companies', { search: data.term }, "get");
     this.setState({ companyList: companies, loaded: true });
   }
 
+  /** */
   renderCompanyList = () => {
     return (
-      <ul className="mb-5 p-0 mx-auto" style={{maxWidth: "920px"}}>
+      <ul className="companies-list mb-5 p-0 mx-auto">
         {this.state.companyList.map(c => (
           <CompanyListItem key={c.handle} {...c} />
         ))}
@@ -46,6 +53,6 @@ export default class CompaniesList extends Component {
         <SearchForm search={this.search} />
         {this.state.loaded ? this.renderCompanyList() : <Spinner />}
       </div>
-    )
+    );
   }
 }

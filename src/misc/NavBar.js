@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
+import './NavBar.css';
 
+/**
+ * 
+ */
 export default class NavBar extends Component {
   render() {
     let loggedInNav = (
@@ -8,7 +12,11 @@ export default class NavBar extends Component {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
             <NavLink exact to="/" className="navbar-brand text-light">
-              <img src="https://res.cloudinary.com/dxklaorw6/image/upload/v1558640373/joblyicon.png" alt="jobly-logo-sm" style={{width: "70px"}} />
+              <img
+                className="nav-logo"
+                src="https://res.cloudinary.com/dxklaorw6/image/upload/v1558640373/joblyicon.png"
+                alt="jobly-logo-sm"
+              />
             </NavLink>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
@@ -34,14 +42,17 @@ export default class NavBar extends Component {
           </div>
         </nav>
       </div>
-    )
-
+    );
     let loggedOutNav = (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
             <NavLink exact to="/" className="navbar-brand text-light">
-              <img src="https://res.cloudinary.com/dxklaorw6/image/upload/v1558640373/joblyicon.png" alt="jobly-logo-sm" style={{width: "70px"}} />
+              <img
+                className="nav-logo"
+                src="https://res.cloudinary.com/dxklaorw6/image/upload/v1558640373/joblyicon.png"
+                alt="jobly-logo-sm"
+              />
             </NavLink>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
@@ -62,7 +73,7 @@ export default class NavBar extends Component {
           </div>
         </nav>
       </div>
-    )
+    );
     return this.props.loggedIn ? loggedInNav : loggedOutNav;
   }
 }
