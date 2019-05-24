@@ -54,12 +54,24 @@ export default class JobsList extends Component {
     }
   }
 
+  // unApply
+  handleUnapply = async (id) => {
+    try {
+      const username = localStorage.getItem("username");
+      await JoblyApi.request(`jobs/${id}/apply`,
+                             { username },
+                             'delete');
+    } catch (e) {
+      this.setState({ isError: true, error: e });
+    }
+  }
+
   /** */
   renderJobList = () => {
     return (
       <ul className="jobs-list mb-5 p-0 mx-auto">
         {this.state.jobs.map(j => (
-          <JobListItem key={j.id} {...j} handleApply={this.handleApply} />
+          <JobListItem key={j.id} {...j} handleApply={this.handleApply} handleUnapply={this.handleUnapply} />
         ))}
       </ul>
     );

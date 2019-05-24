@@ -36,18 +36,22 @@ export default class RegisterForm extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     const { username, password, first_name, last_name, email, photo_url } = this.state;
+    const userObj = { username, password, first_name, last_name, email, photo_url };
+    for (let key in userObj) {
+      if (userObj[key] === "") {
+        delete userObj[key];
+      }
+    }
     try {
-      let { token, user } = await JoblyApi.request('users', { username, password, first_name, last_name, email, photo_url }, "post");
+      let { token, newUser } = await JoblyApi.request('users', userObj, "post");
       if (token) {
         localStorage.setItem("token", token);
-        localStorage.setItem("username", user.username);
+        localStorage.setItem("username", newUser.username);
         this.props.history.push('/jobs');
       } else {
         throw new Error("Invalid Input");
       }
-      this.setState({ isError: false });
     } catch (e) {
-      console.log(e)
       this.setState({ isError: true, error: e })
     }
   }

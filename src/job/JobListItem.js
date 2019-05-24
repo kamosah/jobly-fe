@@ -19,9 +19,22 @@ export default class JobListItem extends Component {
   }
 
   /** */
-  applyClick = () => {
-    this.props.handleApply(this.props.id);
-    this.setState({ applyState: "applied" });
+  apply = async () => {
+    try {
+      await this.props.handleApply(this.props.id);
+      this.setState({ applyState: "applied" });
+    } catch(e) {
+      this.setState({isError: true, error: e});
+    }
+  }
+
+  unapply = async () => {
+    try {
+      this.props.handleUnapply(this.props.id);
+      this.setState({ applyState: null });
+    } catch(e) {
+      this.setState({ isError: true, error: e});
+    }
   }
   
   render() {
@@ -45,9 +58,9 @@ export default class JobListItem extends Component {
                 Equity: {equity}
               </p>
               {this.state.applyState ? (
-                <button className="applyBtn btn btn-muted btn-sm">Applied</button>
+                <button className="btn btn-primary btn-sm" onClick={this.unapply}>Unapply</button>
               ) : (
-                <button className="btn btn-primary btn-sm" onClick={this.applyClick}>Apply</button>
+                <button className="btn btn-primary btn-sm" onClick={this.apply}>Apply</button>
               )}
             </div>
           </div>

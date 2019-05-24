@@ -11,7 +11,6 @@ import LoginForm from './user/LoginForm';
 import HomePage from './misc/HomePage';
 import NotFound from './misc/NotFound';
 import JobsList from './job/JobsList';
-import Logout from './user/Logout';
 
 /**
  * 
@@ -44,11 +43,6 @@ export default class Routes extends Component {
           exact
           path="/profile"
           render={(rtProps) => <ProfilePage ensureLoggedIn={this.props.ensureLoggedIn} {...rtProps} />}
-        />
-        <Route
-          exact
-          path="/logout"
-          render={(rtProps) => <Logout {...rtProps} />}
         />
         <Route
           exact

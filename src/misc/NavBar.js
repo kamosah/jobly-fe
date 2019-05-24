@@ -1,12 +1,23 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import './NavBar.css';
 
 /**
  * 
  */
-export default class NavBar extends Component {
+class NavBar extends Component {
+  constructor(props){
+    super(props);
+  }
+
+  handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    this.props.history.push('/');
+  }
+
   render() {
     // to display while user is logged in
     let loggedInNav = (
@@ -37,7 +48,7 @@ export default class NavBar extends Component {
                   <NavLink exact to="/profile" className="nav-link text-light">Profile</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink exact to="/logout" className="nav-link text-light">Logout</NavLink>
+                  <span onClick={this.handleLogout} className="nav-link text-light">Logout</span>
                 </li>
               </ul>
             </div>
@@ -80,6 +91,8 @@ export default class NavBar extends Component {
     return this.props.loggedIn ? loggedInNav : loggedOutNav;
   }
 }
+
+export default withRouter(NavBar);
 
 NavBar.defaultProps = {
   logoUrl: "https://res.cloudinary.com/dxklaorw6/image/upload/v1558640373/joblyicon.png"
