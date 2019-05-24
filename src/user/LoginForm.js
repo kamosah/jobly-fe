@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import JoblyApi from '../helpers/joblyApi';
 import Alert from '../misc/Alert';
 import "./LoginForm.css";
@@ -77,4 +78,11 @@ export default class LoginForm extends Component {
       </div>
     );
   }
+}
+
+LoginForm.propTypes = {
+  ensureLoggedIn: PropTypes.func,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
 }

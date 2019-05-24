@@ -4,6 +4,9 @@ import NavBar from './misc/NavBar';
 import Routes from './Routes';
 import './App.css';
 
+/**
+ * 
+ */
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -12,10 +15,12 @@ export default class App extends Component {
     }
   }
 
+  /** */
   componentDidMount() {
     this.setState({ loggedIn: localStorage.getItem('token') ? true : false });
   }
 
+  /** */
   ensureLoggedIn = () => {
     let loggedIn = localStorage.getItem('token') ? true : false;
     this.setState({ loggedIn });

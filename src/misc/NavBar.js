@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './NavBar.css';
 
 /**
@@ -7,6 +8,7 @@ import './NavBar.css';
  */
 export default class NavBar extends Component {
   render() {
+    // to display while user is logged in
     let loggedInNav = (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -43,6 +45,7 @@ export default class NavBar extends Component {
         </nav>
       </div>
     );
+    // to display while no user is logged in
     let loggedOutNav = (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -76,4 +79,8 @@ export default class NavBar extends Component {
     );
     return this.props.loggedIn ? loggedInNav : loggedOutNav;
   }
+}
+
+NavBar.propTypes = {
+  loggedIn: PropTypes.bool
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import "./CompanyListItem.css"
 
@@ -39,4 +40,11 @@ export default class CompanyListItem extends Component {
       </li>
     );
   }
+}
+
+CompanyListItem.propTypes = {
+  description: PropTypes.string,
+  handle: PropTypes.string,
+  logo_url: PropTypes.string,
+  name: PropTypes.string
 }

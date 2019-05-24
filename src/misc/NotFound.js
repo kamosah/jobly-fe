@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import "./NotFound.css";
 
 /**
@@ -26,3 +27,8 @@ export default class NotFound extends Component {
     );
   }
 }
+
+NotFound.propTypes = {
+  ensureLoggedIn: PropTypes.func
+}
+

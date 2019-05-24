@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import JoblyApi from '../helpers/joblyApi';
+
 import CompanyListItem from './CompanyListItem';
 import SearchForm from '../misc/SearchForm';
 import Spinner from '../misc/Spinner';
@@ -55,4 +57,11 @@ export default class CompaniesList extends Component {
       </div>
     );
   }
+}
+
+CompaniesList.propTypes = {
+  ensureLoggedIn: PropTypes.func,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
 }

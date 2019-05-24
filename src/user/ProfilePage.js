@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import JoblyApi from '../helpers/joblyApi';
 import Alert from '../misc/Alert';
 import "./ProfilePage.css";
@@ -157,3 +158,9 @@ export default class ProfilePage extends Component {
   }
 }
 
+ProfilePage.propTypes = {
+  ensureLoggedIn: PropTypes.func,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
+}

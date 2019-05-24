@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * 
@@ -13,4 +14,8 @@ export default class Alert extends Component {
       </div>
     );
   }
+}
+
+Alert.propTypes = {
+  error: PropTypes.array
 }

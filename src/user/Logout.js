@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 
 /**
  * 
@@ -17,4 +18,10 @@ export default class Logout extends Component {
       <div />
     )
   }
+}
+
+Logout.propTypes = {
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
 }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import formatSalary from '../helpers/formatSalary';
-import "./JobListItem"
+
+import "./JobListItem.css"
 
 /**
  * 
@@ -53,4 +55,15 @@ export default class JobListItem extends Component {
       </li>
     );
   }
+}
+
+JobListItem.propTypes = {
+  company_handle: PropTypes.string,
+  equity: PropTypes.number,
+  handleApply: PropTypes.func,
+  id: PropTypes.number,
+  name: PropTypes.string,
+  salary: PropTypes.number,
+  state: PropTypes.string,
+  title: PropTypes.string
 }

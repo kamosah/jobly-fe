@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import JoblyApi from '../helpers/joblyApi';
+
 import JobsList from '../job/JobsList';
 import Spinner from '../misc/Spinner';
 import "./CompanyPage.css"
 
-let imgDefault = "https://www.designevo.com/res/templates/thumb_small/bright-blue-kaleidoscope.png";
+const imgDefault = "https://www.designevo.com/res/templates/thumb_small/bright-blue-kaleidoscope.png";
 
 /**
  * 
@@ -59,4 +61,11 @@ export default class CompanyPage extends Component {
       </div>
     );
   }
+}
+
+CompanyPage.propTypes = {
+  ensureLoggedIn: PropTypes.func,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
 }
