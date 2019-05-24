@@ -6,8 +6,6 @@ import JobsList from '../job/JobsList';
 import Spinner from '../misc/Spinner';
 import "./CompanyPage.css"
 
-const imgDefault = "https://www.designevo.com/res/templates/thumb_small/bright-blue-kaleidoscope.png";
-
 /**
  * 
  */
@@ -28,8 +26,8 @@ export default class CompanyPage extends Component {
   }
 
   /** */
-  defaultImgOnErr(e) {
-    e.target.src = imgDefault;
+  defaultImgOnErr = (e) => {
+    e.target.src = this.props.imgDefault;
   }
 
   /** */
@@ -41,7 +39,7 @@ export default class CompanyPage extends Component {
           <h2 className="mb-4">{name}</h2>
           <img
             className="company-page-logo"
-            src={logo_url ? logo_url : imgDefault}
+            src={logo_url ? logo_url : this.props.imgDefault}
             alt={handle}
             onError={this.defaultImgOnErr}
           />
@@ -63,9 +61,14 @@ export default class CompanyPage extends Component {
   }
 }
 
+CompanyPage.defaultProps = {
+  imgDefault: "https://www.designevo.com/res/templates/thumb_small/bright-blue-kaleidoscope.png"
+}
+
 CompanyPage.propTypes = {
   ensureLoggedIn: PropTypes.func,
   history: PropTypes.object,
   location: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
+  imgDefault: PropTypes.string
 }

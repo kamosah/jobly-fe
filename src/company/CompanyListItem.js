@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import "./CompanyListItem.css"
 
-let imgDefault = "https://www.designevo.com/res/templates/thumb_small/bright-blue-kaleidoscope.png";
-
 /**
  * 
  */
 export default class CompanyListItem extends Component {
 
   /** */
-  defaultImgOnErr(e) {
-    e.target.src = imgDefault;
+  defaultImgOnErr = (e) => {
+    e.target.src = this.props.imgDefault;
   }
 
   render() {
@@ -23,7 +21,7 @@ export default class CompanyListItem extends Component {
           <div className="col-md-2">
             <img
               className="company-logo mb-2"
-              src={logo_url ? logo_url : imgDefault}
+              src={logo_url ? logo_url : this.props.imgDefault}
               alt={handle}
               onError={this.defaultImgOnErr}
             />
@@ -42,9 +40,14 @@ export default class CompanyListItem extends Component {
   }
 }
 
+CompanyListItem.defaultProps = {
+  imgDefault: "https://www.designevo.com/res/templates/thumb_small/bright-blue-kaleidoscope.png"
+}
+
 CompanyListItem.propTypes = {
   description: PropTypes.string,
   handle: PropTypes.string,
   logo_url: PropTypes.string,
-  name: PropTypes.string
+  name: PropTypes.string,
+  imgDefault: PropTypes.string
 }

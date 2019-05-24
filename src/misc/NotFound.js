@@ -18,7 +18,7 @@ export default class NotFound extends Component {
         <div>
           <img
             className="not-found-img"
-            src="https://www.indiefolio.com/assets/img/404/404.png"
+            src={this.props.imgUrl}
             alt="404"
           />
           <h2>Page Not Found</h2>
@@ -29,6 +29,10 @@ export default class NotFound extends Component {
 }
 
 NotFound.propTypes = {
-  ensureLoggedIn: PropTypes.func
+  ensureLoggedIn: PropTypes.func,
+  imgUrl: PropTypes.string
 }
 
+NotFound.defaultProps = {
+  imgUrl: "https://www.indiefolio.com/assets/img/404/404.png"
+}

@@ -16,7 +16,7 @@ export default class NavBar extends Component {
             <NavLink exact to="/" className="navbar-brand text-light">
               <img
                 className="nav-logo"
-                src="https://res.cloudinary.com/dxklaorw6/image/upload/v1558640373/joblyicon.png"
+                src={this.props.logoUrl}
                 alt="jobly-logo-sm"
               />
             </NavLink>
@@ -53,7 +53,7 @@ export default class NavBar extends Component {
             <NavLink exact to="/" className="navbar-brand text-light">
               <img
                 className="nav-logo"
-                src="https://res.cloudinary.com/dxklaorw6/image/upload/v1558640373/joblyicon.png"
+                src={this.props.logoUrl}
                 alt="jobly-logo-sm"
               />
             </NavLink>
@@ -81,6 +81,11 @@ export default class NavBar extends Component {
   }
 }
 
+NavBar.defaultProps = {
+  logoUrl: "https://res.cloudinary.com/dxklaorw6/image/upload/v1558640373/joblyicon.png"
+}
+
 NavBar.propTypes = {
-  loggedIn: PropTypes.bool
+  loggedIn: PropTypes.bool,
+  logoUrl: PropTypes.string
 }
