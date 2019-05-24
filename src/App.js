@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import joblyApi from './helpers/joblyApi.js';
+import { decode } from "jsonwebtoken";
 import NavBar from './misc/NavBar';
 import Routes from './Routes';
 import './App.css';
@@ -11,6 +13,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentUser: "",
       loggedIn: false
     }
   }
@@ -21,9 +24,17 @@ export default class App extends Component {
   }
 
   /** */
-  ensureLoggedIn = () => {
-    let loggedIn = localStorage.getItem('token') ? true : false;
-    this.setState({ loggedIn });
+  ensureLoggedIn = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      let { username } = decode(token);
+      let currentUser = await joblyApi.request(`users/${username}`, {}, 'get');
+      this.setState({ currentUser, loggedIn: true})
+    } catch(err) {
+      this.setState({ currentUser: null, loggedIn: false });
+      localStorage.removeItem('username');
+      localStorage.removeItem('token');
+    }
   }
 
   render() {
