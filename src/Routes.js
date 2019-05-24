@@ -11,6 +11,7 @@ import LoginForm from './user/LoginForm';
 import HomePage from './misc/HomePage';
 import NotFound from './misc/NotFound';
 import JobsList from './job/JobsList';
+import EditProfileForm from './user/EditProfileForm';
 
 /**
  * 
@@ -38,6 +39,11 @@ export default class Routes extends Component {
           exact
           path="/register"
           render={(rtProps) => <RegisterForm {...rtProps} ensureLoggedIn={this.props.ensureLoggedIn} />}
+        />
+        <Route
+          exact
+          path="/edit/profile"
+          render={(rtProps) => <EditProfileForm ensureLoggedIn={this.props.ensureLoggedIn} {...rtProps} />}
         />
         <Route
           exact

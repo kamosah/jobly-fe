@@ -1,5 +1,7 @@
 
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import JoblyApi from '../helpers/joblyApi';
+import { Link } from 'react-router-dom';
 
 export default class EditProfileForm extends Component {
   constructor(props) {
@@ -10,11 +12,12 @@ export default class EditProfileForm extends Component {
       last_name: "",
       email: "",
       photo_url: "",
-      editing: false,
       isError: false,
       error: {}
     }
   }
+
+  
 
   async componentDidMount() {
     this.props.ensureLoggedIn();
@@ -26,6 +29,23 @@ export default class EditProfileForm extends Component {
     } catch (e) {
       this.props.history.push('/login');
     }
+  }
+
+  updateProfile = async (e) => {
+    e.preventDefault();
+    try {
+      const { first_name, last_name, email, photo_url } = this.state;
+      let username = localStorage.getItem('username');
+      await JoblyApi.request(`users/${username}`, { first_name, last_name, email, photo_url }, 'patch');
+      this.setState({ editing: false });
+      this.props.history.push('/profile');
+    } catch (e) {
+      this.setState({ isError: true, error: e });
+    }
+  }
+
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
   }
   
   render() {
@@ -81,7 +101,7 @@ export default class EditProfileForm extends Component {
           <div className="form-group">
             <button className="btn btn-primary mt-1 mb-1 mx-auto">Update</button>
             <br />
-            <span className="btn btn-secondary btn-sm mt-3" onClick={this.editProfile}>Cancel</span>
+            <Link className="btn btn-secondary btn-sm mt-3" to="/profile">Cancel</Link>
           </div>
         </form>
       </div>
@@ -89,8 +109,9 @@ export default class EditProfileForm extends Component {
   }
 }
 
-
-renderEditForm() {
+// {this.state.editing ? this.renderEditForm() : this.renderProfileContent()}
+// onClick={this.editProfile}
+// renderEditForm() {
   
   
-}
+// }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import JobsList from '../job/JobsList';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import JoblyApi from '../helpers/joblyApi';
 import Alert from '../misc/Alert';
@@ -15,13 +16,9 @@ export default class ProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      first_name: "",
-      last_name: "",
-      email: "",
-      photo_url: "",
       editing: false,
       isError: false,
+      job: [],
       error: {}
     }
   }
@@ -32,8 +29,9 @@ export default class ProfilePage extends Component {
     try {
       let username = localStorage.getItem('username');
       let { user } = await JoblyApi.request(`users/${username}`, {}, 'get');
+      let { jobs } = await JoblyApi.request(`jobs/${username}`, {}, "get");
       const { first_name, last_name, email, photo_url } = user;
-      this.setState({ username, first_name, last_name, email, photo_url });
+      this.setState({ username, first_name, last_name, email, photo_url, jobs });
     } catch (e) {
       console.error(e.message);
       this.props.history.push('/login');
@@ -84,20 +82,20 @@ export default class ProfilePage extends Component {
           <hr className="my-4" />
           <div className="user-info">{`${first_name} ${last_name}`}</div>
           <div className="user-info mb-4">{email}</div>
-          <button className="btn btn-primary btn-sm mb-2" onClick={this.editProfile}>Edit Info</button>
+          <Link to='/edit/Profile' className="btn btn-primary btn-sm mb-2" >Edit Info</Link>
         </div>
       </div>
     );
   }
-
  
 
   render() {
     return (
-      <div>
-        {/* {this.state.isError ? <Alert error={this.state.error} /> : null}
-        {this.state.editing ? this.renderEditForm() : this.renderProfileContent()} */}
-        <JobsList jobs={jobs}/>
+      <div className="text-center mt-3">
+        <h1>User Job List</h1>
+        {this.state.isError ? <Alert error={this.state.error} /> : null}
+        {this.renderProfileContent()}
+        <JobsList jobs={this.state.jobs} ensureLoggedIn={this.props.ensureLoggedIn}/>
       </div>
     );
   }
