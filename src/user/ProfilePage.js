@@ -34,6 +34,7 @@ export default class ProfilePage extends Component {
       this.setState({ username, first_name, last_name, email, photo_url });
     } catch (e) {
       console.error(e.message);
+      this.props.history.push('/login');
     }
   }
 

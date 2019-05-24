@@ -29,7 +29,7 @@ export default class HomePage extends Component {
           />
           <p className="slogan mt-1">All the jobs in one, convenient place.</p>
           {!localStorage.getItem('token') ? (
-            <div className="mt-2 mb-4">
+            <div className="mt-4 mb-4">
               <Link to={`/login`}>
                 <button className="btn btn-primary">Login</button>
               </Link>
@@ -38,9 +38,14 @@ export default class HomePage extends Component {
               </Link>
             </div>
           ) : (
-              <p className="welcome-back">Welcome back!</p>
-            )
-          }
+            <div className="mb-4">
+              <p className="welcome-back m-0">Welcome back!</p>
+              <br/>
+              <Link to={`/jobs`}>
+                <button className="btn btn-primary">Jobs</button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     );

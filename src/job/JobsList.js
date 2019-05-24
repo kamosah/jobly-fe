@@ -22,12 +22,16 @@ export default class JobsList extends Component {
   /** */
   async componentDidMount() {
     this.props.ensureLoggedIn();
-    this.setState({ loaded: false })
-    if (!this.props.jobs) {
-      let { jobs } = await JoblyApi.request('jobs', {}, "get");
-      this.setState({ jobs: jobs, loaded: true });
-    } else {
-      this.setState({ jobs: this.props.jobs, loaded: true });
+    try {
+      this.setState({ loaded: false })
+      if (!this.props.jobs) {
+        let { jobs } = await JoblyApi.request('jobs', {}, "get");
+        this.setState({ jobs: jobs, loaded: true });
+      } else {
+        this.setState({ jobs: this.props.jobs, loaded: true });
+      }
+    } catch (e) {
+      this.props.history.push('/login');
     }
   }
 
@@ -73,5 +77,8 @@ export default class JobsList extends Component {
 }
 
 JobsList.propTypes = {
-  ensureLoggedIn: PropTypes.func
+  ensureLoggedIn: PropTypes.func,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
 }

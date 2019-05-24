@@ -8,7 +8,7 @@ import Spinner from '../misc/Spinner';
 import "./CompaniesList.css";
 
 /**
- * 
+ *   
  */
 export default class CompaniesList extends Component {
   constructor(props) {

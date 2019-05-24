@@ -58,7 +58,7 @@ export default class Routes extends Component {
         <Route
           exact
           path="/jobs"
-          render={() => <JobsList ensureLoggedIn={this.props.ensureLoggedIn} />}
+          render={(rtProps) => <JobsList ensureLoggedIn={this.props.ensureLoggedIn} {...rtProps} />}
         />
         <Route
           exact

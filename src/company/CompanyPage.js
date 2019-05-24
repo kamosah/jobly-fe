@@ -20,9 +20,14 @@ export default class CompanyPage extends Component {
 
   /** */
   async componentDidMount() {
-    let res = await JoblyApi.request(`companies/${this.props.match.params.handle}`, {}, "get");
     this.props.ensureLoggedIn();
-    this.setState({ company: res.company, loaded: true });
+    try {
+      let res = await JoblyApi.request(`companies/${this.props.match.params.handle}`, {}, "get");
+      this.props.ensureLoggedIn();
+      this.setState({ company: res.company, loaded: true });
+    } catch (e) {
+      this.props.history.push('/login');
+    }
   }
 
   /** */
