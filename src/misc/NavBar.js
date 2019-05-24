@@ -8,10 +8,8 @@ import './NavBar.css';
  * 
  */
 class NavBar extends Component {
-  constructor(props){
-    super(props);
-  }
 
+  /** */
   handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
@@ -24,7 +22,7 @@ class NavBar extends Component {
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
-            <NavLink exact to="/" className="navbar-brand text-light">
+            <NavLink exact to="/" className="navbar-brand">
               <img
                 className="nav-logo"
                 src={this.props.logoUrl}
@@ -37,18 +35,18 @@ class NavBar extends Component {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <NavLink exact to="/jobs" className="nav-link text-light">Jobs</NavLink>
+                  <NavLink exact to="/jobs" activeClassName="active-nav" className="nav-link">Jobs</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink exact to="/companies" className="nav-link text-light">Companies</NavLink>
+                  <NavLink exact to="/companies" activeClassName="active-nav" className="nav-link">Companies</NavLink>
                 </li>
               </ul>
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <NavLink exact to="/profile" className="nav-link text-light">Profile</NavLink>
+                  <NavLink exact to="/profile" activeClassName="active-nav" className="nav-link">Profile</NavLink>
                 </li>
                 <li className="nav-item">
-                  <span onClick={this.handleLogout} className="nav-link text-light">Logout</span>
+                  <NavLink exact to="/" onClick={this.handleLogout} activeClassName="active-nav" className="nav-link">Logout</NavLink>
                 </li>
               </ul>
             </div>
@@ -61,7 +59,7 @@ class NavBar extends Component {
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
-            <NavLink exact to="/" className="navbar-brand text-light">
+            <NavLink exact to="/" className="navbar-brand">
               <img
                 className="nav-logo"
                 src={this.props.logoUrl}
@@ -77,10 +75,10 @@ class NavBar extends Component {
               </ul>
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <NavLink exact to="/login" className="nav-link text-light">Login</NavLink>
+                  <NavLink exact to="/login" activeClassName="active-nav" className="nav-link">Login</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink exact to="/register" className="nav-link text-light">Register</NavLink>
+                  <NavLink exact to="/register" activeClassName="active-nav" className="nav-link">Register</NavLink>
                 </li>
               </ul>
             </div>

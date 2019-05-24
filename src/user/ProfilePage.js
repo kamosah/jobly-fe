@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import JobsList from '../job/JobsList';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import JoblyApi from '../helpers/joblyApi';
-import Alert from '../misc/Alert';
+
+import JobsList from '../job/JobsList';
+import Spinner from '../misc/Spinner';
 import "./ProfilePage.css";
-
-
-let imgDefault = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS32fZtSx6C6gMJGp95NN5O09FtFIphVAeAVg11q8yD33TWA9Fu";
 
 /**
  * 
@@ -16,9 +14,9 @@ export default class ProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editing: false,
+      jobs: [],
+      loaded: false,
       isError: false,
-      job: [],
       error: {}
     }
   }
@@ -28,19 +26,19 @@ export default class ProfilePage extends Component {
     this.props.ensureLoggedIn();
     try {
       let username = localStorage.getItem('username');
+      if (!username) this.props.history.push('/login');
       let { user } = await JoblyApi.request(`users/${username}`, {}, 'get');
       let { jobs } = await JoblyApi.request(`jobs/${username}`, {}, "get");
       const { first_name, last_name, email, photo_url } = user;
-      this.setState({ username, first_name, last_name, email, photo_url, jobs });
+      this.setState({ username, first_name, last_name, email, photo_url, jobs, loaded: true });
     } catch (e) {
       console.error(e.message);
-      this.props.history.push('/login');
     }
   }
 
   /** */
   defaultImgOnErr(e) {
-    e.target.src = imgDefault;
+    e.target.src = this.props.imgDefault;
   }
 
   /** */
@@ -75,7 +73,7 @@ export default class ProfilePage extends Component {
           <h2 className="mb-3">{username}</h2>
           <img
             className="user-img"
-            src={photo_url ? photo_url : imgDefault}
+            src={photo_url ? photo_url : this.props.imgDefault}
             alt={first_name}
             onError={this.defaultImgOnErr}
           />
@@ -84,26 +82,29 @@ export default class ProfilePage extends Component {
           <div className="user-info mb-4">{email}</div>
           <Link to='/edit/Profile' className="btn btn-primary btn-sm mb-2" >Edit Info</Link>
         </div>
-      </div>
-    );
-  }
- 
-
-  render() {
-    return (
-      <div className="text-center mt-3">
-        <h1>User Job List</h1>
-        {this.state.isError ? <Alert error={this.state.error} /> : null}
-        {this.renderProfileContent()}
         <JobsList jobs={this.state.jobs} ensureLoggedIn={this.props.ensureLoggedIn}/>
       </div>
     );
   }
+ 
+  render() {
+    return (
+      <div className="text-center">
+        {this.state.loaded ? this.renderProfileContent() : <div className="mt-5"><Spinner /></div>}
+      </div>
+    );
+  }
+}
+
+ProfilePage.defaultProps = {
+  imgDefault: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS32fZtSx6C6gMJGp95NN5O09FtFIphVAeAVg11q8yD33TWA9Fu"
+
 }
 
 ProfilePage.propTypes = {
   ensureLoggedIn: PropTypes.func,
   history: PropTypes.object,
   location: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
+  imgDefault: PropTypes.string
 }

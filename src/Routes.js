@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import EditCompanyForm from './company/EditCompanyForm';
 import CompaniesList from './company/CompaniesList';
 import CompanyPage from './company/CompanyPage';
 import RegisterForm from './user/RegisterForm';
@@ -20,11 +19,6 @@ export default class Routes extends Component {
   render() {
     return (
       <Switch>
-        <Route
-          exact
-          path="/companies/edit/:handle"
-          render={(rtProps) => <EditCompanyForm ensureLoggedIn={this.props.ensureLoggedIn} {...rtProps} />}
-        />
         <Route
           exact
           path="/companies/:handle"

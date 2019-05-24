@@ -15,7 +15,8 @@ export default class JobsList extends Component {
     super(props);
     this.state = {
       jobs: [],
-      loaded: false
+      loaded: false,
+      offset: 0
     }
   }
 
