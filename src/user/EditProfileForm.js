@@ -1,9 +1,8 @@
-
 import React, { Component } from 'react';
-import JoblyApi from '../helpers/joblyApi';
 import { Link } from 'react-router-dom';
+import JoblyApi from '../helpers/joblyApi';
 
-export default class EditProfileForm extends Component {
+class EditProfileForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,9 +15,6 @@ export default class EditProfileForm extends Component {
       error: {}
     }
   }
-
-  
-
   async componentDidMount() {
     this.props.ensureLoggedIn();
     try {
@@ -27,6 +23,7 @@ export default class EditProfileForm extends Component {
       const { first_name, last_name, email, photo_url } = user;
       this.setState({ username, first_name, last_name, email, photo_url });
     } catch (e) {
+      console.error(e);
       this.props.history.push('/login');
     }
   }
@@ -109,9 +106,4 @@ export default class EditProfileForm extends Component {
   }
 }
 
-// {this.state.editing ? this.renderEditForm() : this.renderProfileContent()}
-// onClick={this.editProfile}
-// renderEditForm() {
-  
-  
-// }
+export default EditProfileForm;

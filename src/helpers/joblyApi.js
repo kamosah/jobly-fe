@@ -3,7 +3,7 @@ import axios from 'axios';
 /**
  * 
  */
-export default class JoblyApi {
+class JoblyApi {
 
   /** */
   static async request(endpoint, paramsOrData = {}, verb = "get") {
@@ -32,3 +32,5 @@ export default class JoblyApi {
     return res.company;
   }
 }
+
+export default JoblyApi;

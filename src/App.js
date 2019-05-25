@@ -9,7 +9,7 @@ import './App.css';
 /**
  * 
  */
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,8 +29,9 @@ export default class App extends Component {
     try {
       let { username } = decode(token);
       let currentUser = await joblyApi.request(`users/${username}`, {}, 'get');
-      this.setState({ currentUser, loggedIn: true})
-    } catch(err) {
+      this.setState({ currentUser, loggedIn: true })
+    } catch (e) {
+      console.error(e);
       this.setState({ currentUser: null, loggedIn: false });
       localStorage.removeItem('username');
       localStorage.removeItem('token');
@@ -46,3 +47,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default App;

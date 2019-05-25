@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import formatSalary from '../helpers/formatSalary';
-
 import "./JobListItem.css"
 
 /**
  * 
  */
-export default class JobListItem extends Component {
+class JobListItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,20 +22,23 @@ export default class JobListItem extends Component {
     try {
       await this.props.handleApply(this.props.id);
       this.setState({ applyState: "applied" });
-    } catch(e) {
-      this.setState({isError: true, error: e});
+    } catch (e) {
+      console.error(e);
+      this.setState({ isError: true, error: e });
     }
   }
 
+  /** */
   unapply = async () => {
     try {
       this.props.handleUnapply(this.props.id);
       this.setState({ applyState: null });
-    } catch(e) {
-      this.setState({ isError: true, error: e});
+    } catch (e) {
+      console.error(e);
+      this.setState({ isError: true, error: e });
     }
   }
-  
+
   render() {
     const { id, title, salary, equity, company_handle, name } = this.props;
     return (
@@ -60,8 +62,8 @@ export default class JobListItem extends Component {
               {this.state.applyState ? (
                 <button className="btn btn-primary btn-sm" onClick={this.unapply}>Unapply</button>
               ) : (
-                <button className="btn btn-primary btn-sm" onClick={this.apply}>Apply</button>
-              )}
+                  <button className="btn btn-primary btn-sm" onClick={this.apply}>Apply</button>
+                )}
             </div>
           </div>
         </div>
@@ -80,3 +82,5 @@ JobListItem.propTypes = {
   state: PropTypes.string,
   title: PropTypes.string
 }
+
+export default JobListItem;

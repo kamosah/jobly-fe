@@ -6,13 +6,13 @@ import './HomePage.css';
 /**
  * 
  */
-export default class HomePage extends Component {
+class HomePage extends Component {
 
   /** */
   componentDidMount() {
     this.props.ensureLoggedIn();
   }
-  
+
   render() {
     return (
       <div className="home d-flex justify-content-center align-items-center">
@@ -38,14 +38,14 @@ export default class HomePage extends Component {
               </Link>
             </div>
           ) : (
-            <div className="mb-4">
-              <p className="welcome-back m-0">Welcome back!</p>
-              <br/>
-              <Link to={`/jobs`}>
-                <button className="btn btn-primary">Jobs</button>
-              </Link>
-            </div>
-          )}
+              <div className="mb-4">
+                <p className="welcome-back m-0">Welcome back!</p>
+                <br />
+                <Link to={`/jobs`}>
+                  <button className="btn btn-primary">Jobs</button>
+                </Link>
+              </div>
+            )}
         </div>
       </div>
     );
@@ -62,3 +62,5 @@ HomePage.propTypes = {
   bgImgUrl: PropTypes.string,
   logoUrl: PropTypes.string
 }
+
+export default HomePage;

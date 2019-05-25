@@ -15,7 +15,7 @@ import EditProfileForm from './user/EditProfileForm';
 /**
  * 
  */
-export default class Routes extends Component {
+class Routes extends Component {
   render() {
     return (
       <Switch>
@@ -71,3 +71,5 @@ export default class Routes extends Component {
 Routes.propTypes = {
   ensureLoggedIn: PropTypes.func
 }
+
+export default Routes;

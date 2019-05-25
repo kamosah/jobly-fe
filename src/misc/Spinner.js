@@ -4,7 +4,7 @@ import "./Spinner.css"
 /**
  * 
  */
-export default class Spinner extends Component {
+class Spinner extends Component {
   render() {
     return (
       <div>
@@ -13,3 +13,5 @@ export default class Spinner extends Component {
     );
   }
 }
+
+export default Spinner;

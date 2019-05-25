@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import JoblyApi from '../helpers/joblyApi';
-
 import CompanyListItem from './CompanyListItem';
 import SearchForm from '../misc/SearchForm';
 import Spinner from '../misc/Spinner';
 import "./CompaniesList.css";
 
 /**
- *   
+ *
  */
-export default class CompaniesList extends Component {
+class CompaniesList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,6 +25,7 @@ export default class CompaniesList extends Component {
       let { companies } = await JoblyApi.request('companies', {}, "get");
       this.setState({ companyList: companies, loaded: true })
     } catch (e) {
+      console.error(e);
       this.props.history.push('/login');
     }
   }
@@ -65,3 +65,5 @@ CompaniesList.propTypes = {
   location: PropTypes.object,
   match: PropTypes.object
 }
+
+export default CompaniesList;

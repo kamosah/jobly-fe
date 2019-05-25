@@ -1,7 +1,7 @@
 /**
  * 
  */
-export default function formatSalary(num) {
+function formatSalary(num) {
   let numStr = num.toString();
   let output = "";
   let counter = 0;
@@ -15,3 +15,5 @@ export default function formatSalary(num) {
   }
   return "$" + output;
 }
+
+export default formatSalary;

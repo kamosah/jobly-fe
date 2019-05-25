@@ -5,7 +5,7 @@ import "./NotFound.css";
 /**
  * 
  */
-export default class NotFound extends Component {
+class NotFound extends Component {
 
   /** */
   componentDidMount() {
@@ -36,3 +36,5 @@ NotFound.propTypes = {
 NotFound.defaultProps = {
   imgUrl: "https://www.indiefolio.com/assets/img/404/404.png"
 }
+
+export default NotFound;

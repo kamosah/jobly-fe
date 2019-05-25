@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 /**
  * 
  */
-export default class SearchForm extends Component {
+class SearchForm extends Component {
   constructor(props) {
     super(props);
     this.state = { term: "" };
@@ -44,3 +44,5 @@ export default class SearchForm extends Component {
 SearchForm.propTypes = {
   search: PropTypes.func
 }
+
+export default SearchForm;

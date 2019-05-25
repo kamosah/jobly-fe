@@ -6,7 +6,7 @@ import "./CompanyListItem.css"
 /**
  * 
  */
-export default class CompanyListItem extends Component {
+class CompanyListItem extends Component {
 
   /** */
   defaultImgOnErr = (e) => {
@@ -51,3 +51,5 @@ CompanyListItem.propTypes = {
   name: PropTypes.string,
   imgDefault: PropTypes.string
 }
+
+export default CompanyListItem;

@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import JoblyApi from '../helpers/joblyApi';
-
 import JobListItem from './JobListItem';
-import Spinner from '../misc/Spinner';
 import SearchForm from '../misc/SearchForm';
+import Spinner from '../misc/Spinner';
 import './JobsList.css';
 
 /**
  * 
  */
-export default class JobsList extends Component {
+class JobsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,6 +31,7 @@ export default class JobsList extends Component {
         this.setState({ jobs: this.props.jobs, loaded: true });
       }
     } catch (e) {
+      console.error(e);
       this.props.history.push('/login');
     }
   }
@@ -48,9 +48,10 @@ export default class JobsList extends Component {
     try {
       const username = localStorage.getItem("username");
       await JoblyApi.request(`jobs/${id}/apply`,
-                             { id, username, state: "applied" },
-                             'post');
+        { id, username, state: "applied" },
+        'post');
     } catch (e) {
+      console.error(e);
       this.setState({ isError: true, error: e });
     }
   }
@@ -60,9 +61,10 @@ export default class JobsList extends Component {
     try {
       const username = localStorage.getItem("username");
       await JoblyApi.request(`jobs/${id}/apply`,
-                             { username },
-                             'delete');
+        { username },
+        'delete');
     } catch (e) {
+      console.error(e);
       this.setState({ isError: true, error: e });
     }
   }
@@ -95,3 +97,5 @@ JobsList.propTypes = {
   location: PropTypes.object,
   match: PropTypes.object
 }
+
+export default JobsList;

@@ -7,7 +7,7 @@ import "./RegisterForm.css";
 /**
  * 
  */
-export default class RegisterForm extends Component {
+class RegisterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,6 +52,7 @@ export default class RegisterForm extends Component {
         throw new Error("Invalid Input");
       }
     } catch (e) {
+      console.error(e);
       this.setState({ isError: true, error: e })
     }
   }
@@ -139,3 +140,5 @@ RegisterForm.propTypes = {
   location: PropTypes.object,
   match: PropTypes.object
 }
+
+export default RegisterForm;

@@ -7,7 +7,7 @@ import "./LoginForm.css";
 /**
  * 
  */
-export default class LoginForm extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,6 +39,7 @@ export default class LoginForm extends Component {
         throw new Error("Invalid Credentials");
       }
     } catch (e) {
+      console.error(e);
       this.setState({ isError: true, error: e });
     }
   }
@@ -86,3 +87,5 @@ LoginForm.propTypes = {
   location: PropTypes.object,
   match: PropTypes.object
 }
+
+export default LoginForm;

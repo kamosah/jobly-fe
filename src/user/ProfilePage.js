@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import JoblyApi from '../helpers/joblyApi';
-
 import JobsList from '../job/JobsList';
 import Spinner from '../misc/Spinner';
 import "./ProfilePage.css";
@@ -10,7 +9,7 @@ import "./ProfilePage.css";
 /**
  * 
  */
-export default class ProfilePage extends Component {
+class ProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,7 +31,7 @@ export default class ProfilePage extends Component {
       const { first_name, last_name, email, photo_url } = user;
       this.setState({ username, first_name, last_name, email, photo_url, jobs, loaded: true });
     } catch (e) {
-      console.error(e.message);
+      console.error(e);
     }
   }
 
@@ -50,6 +49,7 @@ export default class ProfilePage extends Component {
       await JoblyApi.request(`users/${username}`, { first_name, last_name, email, photo_url }, 'patch');
       this.setState({ editing: false });
     } catch (e) {
+      console.error(e);
       this.setState({ isError: true, error: e });
     }
   }
@@ -108,3 +108,5 @@ ProfilePage.propTypes = {
   match: PropTypes.object,
   imgDefault: PropTypes.string
 }
+
+export default ProfilePage;

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './Alert.css';
 
 /**
  * 
  */
-export default class Alert extends Component {
+class Alert extends Component {
   render() {
     return (
-      <div className="card mb-4 mx-auto" style={{width: "400px"}}>
+      <div className="alert-card card mb-4 mx-auto">
         <div className="card-body">
           {this.props.error}
         </div>
@@ -19,3 +20,5 @@ export default class Alert extends Component {
 Alert.propTypes = {
   error: PropTypes.array
 }
+
+export default Alert;

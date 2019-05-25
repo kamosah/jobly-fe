@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import PropTypes from 'prop-types';
 import './NavBar.css';
 
 /**
@@ -90,8 +90,6 @@ class NavBar extends Component {
   }
 }
 
-export default withRouter(NavBar);
-
 NavBar.defaultProps = {
   logoUrl: "https://res.cloudinary.com/dxklaorw6/image/upload/v1558640373/joblyicon.png"
 }
@@ -100,3 +98,5 @@ NavBar.propTypes = {
   loggedIn: PropTypes.bool,
   logoUrl: PropTypes.string
 }
+
+export default withRouter(NavBar);

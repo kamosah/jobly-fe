@@ -4,6 +4,9 @@
 
 .user-img {
   max-width: 140px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px #333;
 }
 
 .user-info {

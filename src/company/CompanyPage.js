@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import JoblyApi from '../helpers/joblyApi';
-
 import JobsList from '../job/JobsList';
 import Spinner from '../misc/Spinner';
 import "./CompanyPage.css"
@@ -9,7 +8,7 @@ import "./CompanyPage.css"
 /**
  * 
  */
-export default class CompanyPage extends Component {
+class CompanyPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,6 +25,7 @@ export default class CompanyPage extends Component {
       this.props.ensureLoggedIn();
       this.setState({ company: res.company, loaded: true });
     } catch (e) {
+      console.error(e);
       this.props.history.push('/login');
     }
   }
@@ -77,3 +77,5 @@ CompanyPage.propTypes = {
   match: PropTypes.object,
   imgDefault: PropTypes.string
 }
+
+export default CompanyPage;
