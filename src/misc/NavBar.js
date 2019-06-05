@@ -24,7 +24,7 @@ class NavBar extends Component {
     // to display while user is logged in
     let loggedInNav = (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
           <div className="container-fluid">
             <NavLink exact to="/" className="navbar-brand">
               <img
@@ -61,7 +61,7 @@ class NavBar extends Component {
     // to display while no user is logged in
     let loggedOutNav = (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
           <div className="container-fluid">
             <NavLink exact to="/" className="navbar-brand">
               <img

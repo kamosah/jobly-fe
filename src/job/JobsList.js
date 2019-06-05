@@ -48,7 +48,7 @@ class JobsList extends Component {
       }
     } catch (e) {
       console.error(e);
-      this.setState({ isError: true, error: e });
+      this.setState({ isError: true, error: e, loaded: true });
     }
   }
 
@@ -62,7 +62,7 @@ class JobsList extends Component {
         this.setState({ loaded: true, offset: newOffset, page: this.state.page + 1, jobs: jobsAndCount[0], howMany: jobsAndCount[1] });
       } catch (e) {
         console.error(e);
-        this.setState({ isError: true, error: e });
+        this.setState({ isError: true, error: e, loaded: true });
       }
     }
   }
@@ -77,7 +77,7 @@ class JobsList extends Component {
         this.setState({ loaded: true, offset: newOffset, page: this.state.page - 1, jobs: jobsAndCount[0], howMany: jobsAndCount[1] });
       } catch (e) {
         console.error(e);
-        this.setState({ isError: true, error: e });
+        this.setState({ isError: true, error: e, loaded: true });
       }
     }
   }
@@ -98,7 +98,7 @@ class JobsList extends Component {
         'post');
     } catch (e) {
       console.error(e);
-      this.setState({ isError: true, error: e });
+      this.setState({ isError: true, error: e, loaded: true });
     }
   }
 
@@ -111,7 +111,7 @@ class JobsList extends Component {
         'delete');
     } catch (e) {
       console.error(e);
-      this.setState({ isError: true, error: e });
+      this.setState({ isError: true, error: e, loaded: true });
     }
   }
 
@@ -146,15 +146,23 @@ class JobsList extends Component {
   render() {
     return (
       <div className="text-center">
-        {this.props.jobs ? null : (
+        {this.props.jobs ? this.renderJobList() : (
           <div>
-            <h2 className="mt-4">Jobs</h2>
             {this.state.isError ? <Alert error={this.state.error} /> : null}
-            <SearchForm search={this.search} />
-            {this.renderPaginateNav()}
+            {this.state.howMany !== 0 ? (
+              <div>
+                <h2>Jobs</h2>
+                <SearchForm search={this.search} />
+                {this.state.loaded ? (
+                  <div>
+                    {this.renderPaginateNav()}
+                    {this.renderJobList()}
+                  </div>
+                ) : <Spinner />}
+              </div>
+            ) : null}
           </div>
         )}
-        {this.state.loaded ? this.renderJobList() : <Spinner />}
       </div>
     );
   }

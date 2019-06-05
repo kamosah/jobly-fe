@@ -39,7 +39,7 @@ class ProfilePage extends Component {
       this.setState({ username, first_name, last_name, email, photo_url, jobs, loaded: true });
     } catch (e) {
       console.error(e);
-      this.setState({ isError: true, error: e });
+      this.setState({ isError: true, error: e, loaded: true });
     }
   }
 
@@ -54,20 +54,24 @@ class ProfilePage extends Component {
     return (
       <div>
         {this.state.isError ? <Alert error={this.state.error} /> : null}
-        <div className="user-jumbo jumbotron mt-5 mx-auto p-4 text-center">
-          <h2 className="mb-3">{username}</h2>
-          <img
-            className="user-img"
-            src={photo_url ? photo_url : this.props.imgDefault}
-            alt={first_name}
-            onError={this.defaultImgOnErr}
-          />
-          <hr className="my-4" />
-          <div className="user-info">{`${first_name} ${last_name}`}</div>
-          <div className="user-info mb-4">{email}</div>
-          <Link to='/edit/Profile' className="btn btn-primary btn-sm mb-2" >Edit Info</Link>
-        </div>
-        <JobsList jobs={this.state.jobs} ensureLoggedIn={this.props.ensureLoggedIn}/>
+        {username ? (
+          <div>
+            <div className="user-jumbo jumbotron mt-5 mx-auto p-4 text-center">
+              <h2 className="mb-3">{username}</h2>
+              <img
+                className="user-img"
+                src={photo_url ? photo_url : this.props.imgDefault}
+                alt={first_name}
+                onError={this.defaultImgOnErr}
+              />
+              <hr className="my-4" />
+              <div className="user-info">{`${first_name} ${last_name}`}</div>
+              <div className="user-info mb-4">{email}</div>
+              <Link to='/edit/Profile' className="btn btn-primary btn-sm mb-2" >Edit Info</Link>
+            </div>
+            <JobsList jobs={this.state.jobs} ensureLoggedIn={this.props.ensureLoggedIn}/>
+          </div>
+        ) : null}
       </div>
     );
   }

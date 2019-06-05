@@ -59,7 +59,7 @@ class EditProfileForm extends Component {
     return (
       <div>
         {this.state.isError ? <Alert error={this.state.error} /> : null}
-        <h2 className="mt-4 mb-3 text-center">Edit Info</h2>
+        <h2 className="mb-3 text-center">Edit Info</h2>
         <form onSubmit={this.updateProfile} className="edit-user-form mb-5 mx-auto">
           <div className="form-group">
             <label htmlFor="first_name">First Name</label>

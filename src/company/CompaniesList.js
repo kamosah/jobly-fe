@@ -41,7 +41,7 @@ class CompaniesList extends Component {
       this.setState({ companies: companiesAndCount[0], howMany: companiesAndCount[1], loaded: true })
     } catch (e) {
       console.error(e);
-      this.setState({ isError: true, error: e });
+      this.setState({ isError: true, error: e, loaded: true });
     }
   }
 
@@ -55,7 +55,7 @@ class CompaniesList extends Component {
         this.setState({ loaded: true, offset: newOffset, page: this.state.page + 1, companies: companiesAndCount[0], howMany: companiesAndCount[1] });
       } catch (e) {
         console.error(e);
-        this.setState({ isError: true, error: e });
+        this.setState({ isError: true, error: e, loaded: true });
       }
     }
   }
@@ -70,7 +70,7 @@ class CompaniesList extends Component {
         this.setState({ loaded: true, offset: newOffset, page: this.state.page - 1, companies: companiesAndCount[0], howMany: companiesAndCount[1] });
       } catch (e) {
         console.error(e);
-        this.setState({ isError: true, error: e });
+        this.setState({ isError: true, error: e, loaded: true });
       }
     }
   }
@@ -113,15 +113,19 @@ class CompaniesList extends Component {
   render() {
     return (
       <div className="text-center">
-        <h2 className="mt-4">Companies</h2>
         {this.state.isError ? <Alert error={this.state.error} /> : null}
-        <SearchForm search={this.search} />
-        {this.state.loaded ? (
+        {this.state.howMany !== 0 ? (
           <div>
-            {this.renderPaginateNav()}
-            {this.renderCompanyList()}
+            <h2>Companies</h2>
+            <SearchForm search={this.search} />
+            {this.state.loaded ? (
+              <div>
+                {this.renderPaginateNav()}
+                {this.renderCompanyList()}
+              </div>
+            ) : <Spinner />}
           </div>
-        ) : <Spinner />}
+        ) : null }
       </div>
     );
   }

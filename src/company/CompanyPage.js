@@ -26,12 +26,12 @@ class CompanyPage extends Component {
   async componentDidMount() {
     this.props.ensureLoggedIn();
     try {
-      let res = await JoblyApi.request(`companies/${this.props.match.params.handle}`, {}, "get");
+      let res = await JoblyApi.request(`companies/${this.props.match.params.handle}`);
       this.props.ensureLoggedIn();
       this.setState({ company: res.company, loaded: true });
     } catch (e) {
       console.error(e);
-      this.setState({ isError: true, error: e });
+      this.setState({ isError: true, error: e, loaded: true });
     }
   }
 
@@ -46,19 +46,23 @@ class CompanyPage extends Component {
     return (
       <div>
         {this.state.isError ? <Alert error={this.state.error} /> : null}
-        <div className="company-jumbo jumbotron mt-5 mx-auto p-4 text-center">
-          <h2 className="mb-4">{name}</h2>
-          <img
-            className="company-page-logo"
-            src={logo_url ? logo_url : this.props.imgDefault}
-            alt={handle}
-            onError={this.defaultImgOnErr}
-          />
-          <hr className="my-4" />
-          <p className="company-desc">{description}</p>
-          <p className="num-employees">Employees: {num_employees}</p>
-        </div>
-        <JobsList ensureLoggedIn={this.props.ensureLoggedIn} jobs={jobs} />
+        {handle ? (
+          <div>
+            <div className="company-jumbo jumbotron mt-5 mx-auto p-4 text-center">
+              <h2 className="mb-4">{name}</h2>
+              <img
+                className="company-page-logo"
+                src={logo_url ? logo_url : this.props.imgDefault}
+                alt={handle}
+                onError={this.defaultImgOnErr}
+              />
+              <hr className="my-4" />
+              <p className="company-desc">{description}</p>
+              <p className="num-employees">Employees: {num_employees}</p>
+            </div>
+            <JobsList ensureLoggedIn={this.props.ensureLoggedIn} jobs={jobs} />
+          </div>
+        ) : null}
       </div>
     );
   }
@@ -66,7 +70,7 @@ class CompanyPage extends Component {
   render() {
     return (
       <div className="text-center">
-        {this.state.loaded ? this.renderContent() : <div className="mt-5"><Spinner /></div>}
+        {this.state.loaded ? this.renderContent() : <div><Spinner /></div>}
       </div>
     );
   }
