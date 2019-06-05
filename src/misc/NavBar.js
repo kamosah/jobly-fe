@@ -5,11 +5,15 @@ import { withRouter } from 'react-router';
 import './NavBar.css';
 
 /**
- * 
+ * *** NavBar.js ***
+ * - navigation component
+ * - shows jobly logo (link to home page)
+ * - if user is logged in: shows jobs, companies, profile, and logout links
+ * - if user is not logged in: shows login and register links
  */
 class NavBar extends Component {
 
-  /** */
+  /** logic to be run if user clicks "logout" */
   handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');

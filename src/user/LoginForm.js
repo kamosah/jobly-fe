@@ -5,7 +5,8 @@ import Alert from '../misc/Alert';
 import "./LoginForm.css";
 
 /**
- * 
+ * *** LoginForm.js ***
+ * - form allowing a user to login
  */
 class LoginForm extends Component {
   constructor(props) {
@@ -14,17 +15,17 @@ class LoginForm extends Component {
       username: "",
       password: "",
       isError: false,
-      error: {}
+      error: null
     }
   }
 
-  /** */
+  /** form state change logic */
   handleChange = (e) => {
     this.props.ensureLoggedIn();
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  /** */
+  /** form submit logic */
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -47,8 +48,8 @@ class LoginForm extends Component {
   render() {
     return (
       <div>
-        <h1 className="m-4 text-center">Login</h1>
         {this.state.isError ? <Alert error={this.state.error} /> : null}
+        <h1 className="m-4 text-center">Login</h1>
         <form onSubmit={this.handleSubmit} className="login-form mx-auto">
           <div className="form-group">
             <label htmlFor="username">Username</label>
@@ -82,7 +83,6 @@ class LoginForm extends Component {
 }
 
 LoginForm.propTypes = {
-  ensureLoggedIn: PropTypes.func,
   history: PropTypes.object,
   location: PropTypes.object,
   match: PropTypes.object

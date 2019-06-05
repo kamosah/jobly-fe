@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import JoblyApi from '../helpers/joblyApi';
+import Alert from '../misc/Alert';
 
+/**
+ * *** EditProfileForm.js ***
+ * - form allowing user to update their information
+ */
 class EditProfileForm extends Component {
   constructor(props) {
     super(props);
@@ -12,9 +17,10 @@ class EditProfileForm extends Component {
       email: "",
       photo_url: "",
       isError: false,
-      error: {}
+      error: null
     }
   }
+  /** when component mounts, query db to get user info */
   async componentDidMount() {
     this.props.ensureLoggedIn();
     try {
@@ -24,10 +30,11 @@ class EditProfileForm extends Component {
       this.setState({ username, first_name, last_name, email, photo_url });
     } catch (e) {
       console.error(e);
-      this.props.history.push('/login');
+      this.setState({ isError: true, error: e });
     }
   }
 
+  /** logic to be run on form submit */
   updateProfile = async (e) => {
     e.preventDefault();
     try {
@@ -37,10 +44,12 @@ class EditProfileForm extends Component {
       this.setState({ editing: false });
       this.props.history.push('/profile');
     } catch (e) {
+      console.error(e);
       this.setState({ isError: true, error: e });
     }
   }
 
+  /** form state change logic */
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -49,6 +58,7 @@ class EditProfileForm extends Component {
     const { first_name, last_name, email, photo_url } = this.state;
     return (
       <div>
+        {this.state.isError ? <Alert error={this.state.error} /> : null}
         <h2 className="mt-4 mb-3 text-center">Edit Info</h2>
         <form onSubmit={this.updateProfile} className="edit-user-form mb-5 mx-auto">
           <div className="form-group">

@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom';
 import './HomePage.css';
 
 /**
- * 
+ * *** HomePage.js ***
+ * - main landing page for application
+ * - if not logged in, shows login and register buttons
+ * - if logged in, welcomes user back and shows button for jobs list
  */
 class HomePage extends Component {
-
-  /** */
+  
+  /** if user is not logged in, removes any user data from local storage */
   componentDidMount() {
     this.props.ensureLoggedIn();
   }

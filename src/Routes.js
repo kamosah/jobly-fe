@@ -13,7 +13,8 @@ import JobsList from './job/JobsList';
 import EditProfileForm from './user/EditProfileForm';
 
 /**
- * 
+ * *** Routes.js ***
+ * - component allowing react router functionality
  */
 class Routes extends Component {
   render() {
@@ -61,7 +62,7 @@ class Routes extends Component {
         />
         <Route
           exact
-          render={() => <NotFound ensureLoggedIn={this.props.ensureLoggedIn} />}
+          render={() => <NotFound />}
         />
       </Switch>
     );

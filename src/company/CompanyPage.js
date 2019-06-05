@@ -3,21 +3,26 @@ import PropTypes from 'prop-types';
 import JoblyApi from '../helpers/joblyApi';
 import JobsList from '../job/JobsList';
 import Spinner from '../misc/Spinner';
+import Alert from '../misc/Alert';
 import "./CompanyPage.css"
 
 /**
- * 
+ * *** CompanyPage.js ***
+ * - queries the db to get all company info for individual company
+ * - renders company info and all its job postings
  */
 class CompanyPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       company: {},
-      loaded: false
+      loaded: false,
+      isError: false,
+      error: null
     }
   }
 
-  /** */
+  /** when the component mounts, query the db to grab company info */
   async componentDidMount() {
     this.props.ensureLoggedIn();
     try {
@@ -26,20 +31,21 @@ class CompanyPage extends Component {
       this.setState({ company: res.company, loaded: true });
     } catch (e) {
       console.error(e);
-      this.props.history.push('/login');
+      this.setState({ isError: true, error: e });
     }
   }
 
-  /** */
+  /** if company has no image, render default image */
   defaultImgOnErr = (e) => {
     e.target.src = this.props.imgDefault;
   }
 
-  /** */
+  /** render company info */
   renderContent() {
     const { handle, name, logo_url, description, num_employees, jobs } = this.state.company;
     return (
       <div>
+        {this.state.isError ? <Alert error={this.state.error} /> : null}
         <div className="company-jumbo jumbotron mt-5 mx-auto p-4 text-center">
           <h2 className="mb-4">{name}</h2>
           <img

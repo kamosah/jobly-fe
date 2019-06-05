@@ -4,10 +4,14 @@ import JoblyApi from '../helpers/joblyApi';
 import JobListItem from './JobListItem';
 import SearchForm from '../misc/SearchForm';
 import Spinner from '../misc/Spinner';
+import Alert from '../misc/Alert';
+import PaginateNav from '../misc/PaginateNav';
 import './JobsList.css';
 
 /**
- * 
+ * *** JobsList.js ***
+ * - queries the db to get jobs and renders to page
+ * - queries are made on a page by page basis
  */
 class JobsList extends Component {
   constructor(props) {
@@ -18,7 +22,9 @@ class JobsList extends Component {
       howMany: 0,
       page: 1,
       offset: 0,
-      amt: 10
+      amt: 10,
+      isError: false,
+      error: null
     }
   }
 
@@ -42,7 +48,7 @@ class JobsList extends Component {
       }
     } catch (e) {
       console.error(e);
-      this.props.history.push('/login');
+      this.setState({ isError: true, error: e });
     }
   }
 
@@ -56,7 +62,7 @@ class JobsList extends Component {
         this.setState({ loaded: true, offset: newOffset, page: this.state.page + 1, jobs: jobsAndCount[0], howMany: jobsAndCount[1] });
       } catch (e) {
         console.error(e);
-        this.props.history.push('/login');
+        this.setState({ isError: true, error: e });
       }
     }
   }
@@ -71,7 +77,7 @@ class JobsList extends Component {
         this.setState({ loaded: true, offset: newOffset, page: this.state.page - 1, jobs: jobsAndCount[0], howMany: jobsAndCount[1] });
       } catch (e) {
         console.error(e);
-        this.props.history.push('/login');
+        this.setState({ isError: true, error: e });
       }
     }
   }
@@ -83,7 +89,7 @@ class JobsList extends Component {
     this.setState({ jobs: jobs, loaded: true });
   }
 
-  /** */
+  /** logic to be run when a user clicks "apply" button on list item */
   handleApply = async (id) => {
     try {
       const username = localStorage.getItem("username");
@@ -96,7 +102,7 @@ class JobsList extends Component {
     }
   }
 
-  /** */
+  /** logic to be run when a user clicks "unapply" button on list item */
   handleUnapply = async (id) => {
     try {
       const username = localStorage.getItem("username");
@@ -115,15 +121,18 @@ class JobsList extends Component {
     let nextBtn = this.state.offset + this.state.amt < this.state.howMany ? "btn-primary" : "btn-muted no-click";
     let numPages = this.state.howMany / this.state.amt;
     return (
-      <div className="m-3">
-        <button className={`btn ${prevBtn} btn-sm`} onClick={this.prevPage}><i className="fas fa-chevron-left"></i></button>
-        <span className="ml-3 mr-3">- <b>{this.state.page}</b> - &nbsp;of {numPages}</span>
-        <button className={`btn ${nextBtn} btn-sm`} onClick={this.nextPage}><i className="fas fa-chevron-right"></i></button>
-      </div>
+      <PaginateNav
+        prevBtn={prevBtn}
+        prevPage={this.prevPage}
+        page={this.state.page}
+        numPages={numPages}
+        nextBtn={nextBtn}
+        nextPage={this.nextPage}
+      />
     );
   }
 
-  /** render list of jobs */
+  /** render list */
   renderJobList = () => {
     return (
       <ul className="jobs-list mb-5 p-0 mx-auto">
@@ -140,6 +149,7 @@ class JobsList extends Component {
         {this.props.jobs ? null : (
           <div>
             <h2 className="mt-4">Jobs</h2>
+            {this.state.isError ? <Alert error={this.state.error} /> : null}
             <SearchForm search={this.search} />
             {this.renderPaginateNav()}
           </div>
@@ -154,7 +164,8 @@ JobsList.propTypes = {
   ensureLoggedIn: PropTypes.func,
   history: PropTypes.object,
   location: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
+  jobs: PropTypes.array
 }
 
 export default JobsList;

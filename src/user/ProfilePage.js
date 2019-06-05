@@ -4,23 +4,30 @@ import { Link } from 'react-router-dom';
 import JoblyApi from '../helpers/joblyApi';
 import JobsList from '../job/JobsList';
 import Spinner from '../misc/Spinner';
+import Alert from '../misc/Alert';
 import "./ProfilePage.css";
 
 /**
- * 
+ * *** ProfilePage.js ***
+ * - displays information for specified user and jobs they've applied to
  */
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: "",
+      first_name: "",
+      last_name: "",
+      email: "",
+      photo_url: "",
       jobs: [],
       loaded: false,
       isError: false,
-      error: {}
+      error: null
     }
   }
 
-  /** */
+  /** when component mounts, query db to get user info and jobs applied to */
   async componentDidMount() {
     this.props.ensureLoggedIn();
     try {
@@ -32,43 +39,21 @@ class ProfilePage extends Component {
       this.setState({ username, first_name, last_name, email, photo_url, jobs, loaded: true });
     } catch (e) {
       console.error(e);
-    }
-  }
-
-  /** */
-  defaultImgOnErr(e) {
-    e.target.src = this.props.imgDefault;
-  }
-
-  /** */
-  updateProfile = async (e) => {
-    e.preventDefault();
-    try {
-      const { first_name, last_name, email, photo_url } = this.state;
-      let username = localStorage.getItem('username');
-      await JoblyApi.request(`users/${username}`, { first_name, last_name, email, photo_url }, 'patch');
-      this.setState({ editing: false });
-    } catch (e) {
-      console.error(e);
       this.setState({ isError: true, error: e });
     }
   }
 
-  /** */
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  /** if user has no image, render default image */
+  defaultImgOnErr(e) {
+    e.target.src = this.props.imgDefault;
   }
 
-  /** */
-  editProfile = () => {
-    this.setState({ editing: !this.state.editing });
-  }
-
-  /** */
+  /** render profile content */
   renderProfileContent() {
     const { username, first_name, last_name, email, photo_url } = this.state;
     return (
       <div>
+        {this.state.isError ? <Alert error={this.state.error} /> : null}
         <div className="user-jumbo jumbotron mt-5 mx-auto p-4 text-center">
           <h2 className="mb-3">{username}</h2>
           <img

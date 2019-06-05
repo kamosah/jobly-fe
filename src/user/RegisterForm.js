@@ -5,7 +5,8 @@ import Alert from '../misc/Alert';
 import "./RegisterForm.css";
 
 /**
- * 
+ * *** RegisterForm.js ***
+ * - form allowing a user to register
  */
 class RegisterForm extends Component {
   constructor(props) {
@@ -18,21 +19,16 @@ class RegisterForm extends Component {
       email: "",
       photo_url: "",
       isError: false,
-      error: {}
+      error: null
     }
   }
 
-  /** */
-  componentDidMount() {
-    this.props.ensureLoggedIn();
-  }
-
-  /** */
+  /** form state change logic */
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  /** */
+  /** form submit logic */
   handleSubmit = async (e) => {
     e.preventDefault();
     const { username, password, first_name, last_name, email, photo_url } = this.state;
@@ -60,8 +56,8 @@ class RegisterForm extends Component {
   render() {
     return (
       <div>
-        <h1 className="m-4 text-center">Register</h1>
         {this.state.isError ? <Alert error={this.state.error} /> : null}
+        <h1 className="m-4 text-center">Register</h1>
         <form onSubmit={this.handleSubmit} className="register-form mb-5 mx-auto">
           <div className="form-group">
             <label htmlFor="username">Username</label>
@@ -135,7 +131,6 @@ class RegisterForm extends Component {
 }
 
 RegisterForm.propTypes = {
-  ensureLoggedIn: PropTypes.func,
   history: PropTypes.object,
   location: PropTypes.object,
   match: PropTypes.object

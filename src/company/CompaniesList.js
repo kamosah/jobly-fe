@@ -4,27 +4,33 @@ import JoblyApi from '../helpers/joblyApi';
 import CompanyListItem from './CompanyListItem';
 import SearchForm from '../misc/SearchForm';
 import Spinner from '../misc/Spinner';
+import Alert from '../misc/Alert';
 import "./CompaniesList.css";
+import PaginateNav from '../misc/PaginateNav';
 
 /**
- *
+ * *** CompaniesList.js ***
+ * - queries the db to get companies and renders to page
+ * - queries are made on a page by page basis
  */
 class CompaniesList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      companyList: [],
+      companies: [],
       loaded: false,
       howMany: 0,
       page: 1,
       offset: 0,
-      amt: 10
+      amt: 10,
+      isError: false,
+      error: null
     }
   }
 
   /**
    * when this component mounts:
-   * if no companies were passed to the list as props, query the db (first page only)
+   * query the db (first page only)
    * while querying, spinner is shown as "loaded" in state is false
    * when data is returned, hide spinner and render list
    */
@@ -32,10 +38,10 @@ class CompaniesList extends Component {
     this.props.ensureLoggedIn();
     try {
       let { companiesAndCount } = await JoblyApi.request('companies', { offset: this.state.offset, amt: this.state.amt });
-      this.setState({ companyList: companiesAndCount[0], howMany: companiesAndCount[1], loaded: true })
+      this.setState({ companies: companiesAndCount[0], howMany: companiesAndCount[1], loaded: true })
     } catch (e) {
       console.error(e);
-      this.props.history.push('/login');
+      this.setState({ isError: true, error: e });
     }
   }
 
@@ -46,10 +52,10 @@ class CompaniesList extends Component {
       try {
         this.setState({ loaded: false })
         let { companiesAndCount } = await JoblyApi.request('companies', { offset: newOffset, amt: this.state.amt });
-        this.setState({ loaded: true, offset: newOffset, page: this.state.page + 1, companyList: companiesAndCount[0], howMany: companiesAndCount[1] });
+        this.setState({ loaded: true, offset: newOffset, page: this.state.page + 1, companies: companiesAndCount[0], howMany: companiesAndCount[1] });
       } catch (e) {
         console.error(e);
-        this.props.history.push('/login');
+        this.setState({ isError: true, error: e });
       }
     }
   }
@@ -61,10 +67,10 @@ class CompaniesList extends Component {
       try {
         this.setState({ loaded: false })
         let { companiesAndCount } = await JoblyApi.request('companies', { offset: newOffset, amt: this.state.amt });
-        this.setState({ loaded: true, offset: newOffset, page: this.state.page - 1, companyList: companiesAndCount[0], howMany: companiesAndCount[1] });
+        this.setState({ loaded: true, offset: newOffset, page: this.state.page - 1, companies: companiesAndCount[0], howMany: companiesAndCount[1] });
       } catch (e) {
         console.error(e);
-        this.props.history.push('/login');
+        this.setState({ isError: true, error: e });
       }
     }
   }
@@ -73,7 +79,7 @@ class CompaniesList extends Component {
   search = async (data) => {
     this.setState({ loaded: false });
     let { companies } = await JoblyApi.request('companies', { search: data.term }, "get");
-    this.setState({ companyList: companies, loaded: true });
+    this.setState({ companies: companies, loaded: true });
   }
 
   /** render pagination navigation */
@@ -82,19 +88,22 @@ class CompaniesList extends Component {
     let nextBtn = this.state.offset + this.state.amt < this.state.howMany ? "btn-primary" : "btn-muted no-click";
     let numPages = this.state.howMany / this.state.amt;
     return (
-      <div className="m-3">
-        <button className={`btn ${prevBtn} btn-sm`} onClick={this.prevPage}><i className="fas fa-chevron-left"></i></button>
-        <span className="ml-3 mr-3">- <b>{this.state.page}</b> - &nbsp;of {numPages}</span>
-        <button className={`btn ${nextBtn} btn-sm`} onClick={this.nextPage}><i className="fas fa-chevron-right"></i></button>
-      </div>
+      <PaginateNav
+        prevBtn={prevBtn}
+        prevPage={this.prevPage}
+        page={this.state.page}
+        numPages={numPages}
+        nextBtn={nextBtn}
+        nextPage={this.nextPage}
+      />
     );
   }
 
-  /** render list of companies */
+  /** render list */
   renderCompanyList = () => {
     return (
       <ul className="companies-list mb-5 p-0 mx-auto">
-        {this.state.companyList.map(c => (
+        {this.state.companies.map(c => (
           <CompanyListItem key={c.handle} {...c} />
         ))}
       </ul>
@@ -105,6 +114,7 @@ class CompaniesList extends Component {
     return (
       <div className="text-center">
         <h2 className="mt-4">Companies</h2>
+        {this.state.isError ? <Alert error={this.state.error} /> : null}
         <SearchForm search={this.search} />
         {this.state.loaded ? (
           <div>

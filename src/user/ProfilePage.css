@@ -1,5 +1,6 @@
 .user-jumbo {
-  max-width: 440px;
+  max-width: 460px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }
 
 .user-img {

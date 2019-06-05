@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import "./CompanyListItem.css"
 
 /**
- * 
+ * *** CompanyListItem.js ***
+ * - displays card for individual company
  */
 class CompanyListItem extends Component {
 
-  /** */
+  /** if company has no image, render default image */
   defaultImgOnErr = (e) => {
     e.target.src = this.props.imgDefault;
   }

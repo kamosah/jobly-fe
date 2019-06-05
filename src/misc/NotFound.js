@@ -3,15 +3,10 @@ import PropTypes from 'prop-types';
 import "./NotFound.css";
 
 /**
- * 
+ * *** NotFound.js ***
+ * - component to be mounted in case of 404
  */
 class NotFound extends Component {
-
-  /** */
-  componentDidMount() {
-    this.props.ensureLoggedIn();
-  }
-
   render() {
     return (
       <div className="not-found-container">
@@ -29,7 +24,6 @@ class NotFound extends Component {
 }
 
 NotFound.propTypes = {
-  ensureLoggedIn: PropTypes.func,
   imgUrl: PropTypes.string
 }
 

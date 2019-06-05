@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import "./Spinner.css"
 
 /**
- * 
+ * *** Spinner.js ***
+ * - simple loading spinner component
  */
 class Spinner extends Component {
   render() {
