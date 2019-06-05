@@ -46,7 +46,7 @@ class NavBar extends Component {
                   <NavLink exact to="/profile" activeClassName="active-nav" className="nav-link">Profile</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink exact to="/" onClick={this.handleLogout} activeClassName="active-nav" className="nav-link">Logout</NavLink>
+                  <NavLink exact to="/" onClick={this.handleLogout} className="nav-link">Logout</NavLink>
                 </li>
               </ul>
             </div>

@@ -60,7 +60,7 @@ class JobListItem extends Component {
                 Equity: {equity}
               </p>
               {this.state.applyState ? (
-                <button className="btn btn-primary btn-sm" onClick={this.unapply}>Unapply</button>
+                <button className="btn btn-secondary btn-sm" onClick={this.unapply}>Unapply</button>
               ) : (
                   <button className="btn btn-primary btn-sm" onClick={this.apply}>Apply</button>
                 )}

@@ -1,3 +1,7 @@
 .jobs-list {
   max-width: 460px;
 }
+
+.no-click {
+  pointer-events: none!important;
+}

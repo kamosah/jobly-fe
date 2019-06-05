@@ -28,7 +28,7 @@ class SearchForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="m-4 form-inline d-flex justify-content-center">
+      <form onSubmit={this.handleSubmit} className="mt-4 form-inline d-flex justify-content-center">
         <input
           className="form-control col-6"
           name="term"
