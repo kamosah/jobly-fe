@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import JoblyApi from '../helpers/joblyApi';
 import Alert from '../misc/Alert';
 
@@ -106,7 +107,7 @@ class EditProfileForm extends Component {
             />
           </div>
           <div className="form-group">
-            <button className="btn btn-primary mt-1 mb-1 mx-auto">Update</button>
+            <button className="btn btn-primary mt-1 mb-1 mx-auto" data-testid="update-btn">Update</button>
             <br />
             <Link className="btn btn-secondary btn-sm mt-3" to="/profile">Cancel</Link>
           </div>
@@ -114,6 +115,18 @@ class EditProfileForm extends Component {
       </div>
     );
   }
+}
+
+EditProfileForm.defaultProps = {
+  history: {},
+  location: {},
+  match: {}
+}
+
+EditProfileForm.propTypes = {
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
 }
 
 export default EditProfileForm;

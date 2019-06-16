@@ -58,7 +58,7 @@ class JobListItem extends Component {
                 {name ? (
                   <span>
                     <span>Company: </span>
-                    <Link key={id} to={`/companies/${company_handle}`}>{name}</Link>
+                    <Link key={id} to={`/companies/${company_handle}`} data-testid="company-name">{name}</Link>
                   </span>
                 ) : null}
                 {name ? <br /> : null}
@@ -77,6 +77,17 @@ class JobListItem extends Component {
       </li>
     );
   }
+}
+
+JobListItem.defaultProps = {
+  company_handle: "company_handle",
+  equity: 0,
+  handleApply: () => null,
+  id: 0,
+  name: "name",
+  salary: 0,
+  state: "state",
+  title: "title"
 }
 
 JobListItem.propTypes = {

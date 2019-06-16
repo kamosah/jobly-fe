@@ -112,7 +112,7 @@ class CompaniesList extends Component {
 
   render() {
     return (
-      <div className="text-center">
+      <div className="text-center" data-testid="companies-list-container">
         {this.state.isError ? <Alert error={this.state.error} /> : null}
         {this.state.howMany !== 0 ? (
           <div>
@@ -129,6 +129,13 @@ class CompaniesList extends Component {
       </div>
     );
   }
+}
+
+CompaniesList.defaultProps = {
+  ensureLoggedIn: () => null,
+  history: {},
+  location: {},
+  match: {}
 }
 
 CompaniesList.propTypes = {

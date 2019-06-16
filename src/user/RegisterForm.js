@@ -122,12 +122,18 @@ class RegisterForm extends Component {
             />
           </div>
           <div className="form-group">
-            <button className="btn btn-primary">Submit</button>
+            <button className="btn btn-primary" data-testid="submit-btn">Submit</button>
           </div>
         </form>
       </div>
     );
   }
+}
+
+RegisterForm.defaultProps = {
+  history: {},
+  location: {},
+  match: {}
 }
 
 RegisterForm.propTypes = {

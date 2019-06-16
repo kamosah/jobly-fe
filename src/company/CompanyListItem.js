@@ -30,7 +30,7 @@ class CompanyListItem extends Component {
           <div className="col-md-10">
             <div className="card-body p-1">
               <Link key={handle} to={`/companies/${handle}`}>
-                <h5 className="card-title">{name}</h5>
+                <h5 className="card-title" data-testid="company-name">{name}</h5>
               </Link>
               <p className="card-text">{description}</p>
             </div>
@@ -42,6 +42,10 @@ class CompanyListItem extends Component {
 }
 
 CompanyListItem.defaultProps = {
+  description: "description",
+  handle: "handle",
+  logo_url: "logo_url",
+  name: "name",
   imgDefault: "https://www.designevo.com/res/templates/thumb_small/bright-blue-kaleidoscope.png"
 }
 

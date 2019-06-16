@@ -35,10 +35,14 @@ class SearchForm extends Component {
           value={this.state.term}
           onChange={this.handleChange}
           required />
-        <button className="ml-2 btn btn-primary">Search</button>
+        <button className="ml-2 btn btn-primary" data-testid="search-btn">Search</button>
       </form>
     );
   }
+}
+
+SearchForm.defaultProps = {
+  search: () => null
 }
 
 SearchForm.propTypes = {

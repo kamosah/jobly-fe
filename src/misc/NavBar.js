@@ -79,7 +79,7 @@ class NavBar extends Component {
               </ul>
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <NavLink exact to="/login" activeClassName="active-nav" className="nav-link">Login</NavLink>
+                  <NavLink exact to="/login" activeClassName="active-nav" className="nav-link" data-testid="login">Login</NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink exact to="/register" activeClassName="active-nav" className="nav-link">Register</NavLink>
@@ -95,6 +95,7 @@ class NavBar extends Component {
 }
 
 NavBar.defaultProps = {
+  loggedIn: false,
   logoUrl: "https://res.cloudinary.com/dxklaorw6/image/upload/v1558640373/joblyicon.png"
 }
 

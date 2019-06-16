@@ -16,19 +16,19 @@ class NotFound extends Component {
             src={this.props.imgUrl}
             alt="404"
           />
-          <h2>Page Not Found</h2>
+          <h2 data-testid="not-found">Page Not Found</h2>
         </div>
       </div>
     );
   }
 }
 
-NotFound.propTypes = {
-  imgUrl: PropTypes.string
-}
-
 NotFound.defaultProps = {
   imgUrl: "https://www.indiefolio.com/assets/img/404/404.png"
+}
+
+NotFound.propTypes = {
+  imgUrl: PropTypes.string
 }
 
 export default NotFound;

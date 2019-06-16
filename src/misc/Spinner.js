@@ -8,7 +8,7 @@ import "./Spinner.css"
 class Spinner extends Component {
   render() {
     return (
-      <div>
+      <div data-testid="container">
         <i className="fas fa-spinner fa-spin"></i>
       </div>
     );

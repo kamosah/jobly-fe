@@ -145,7 +145,7 @@ class JobsList extends Component {
 
   render() {
     return (
-      <div className="text-center">
+      <div className="text-center" data-testid="content-container">
         {this.props.jobs ? this.renderJobList() : (
           <div>
             {this.state.isError ? <Alert error={this.state.error} /> : null}
@@ -166,6 +166,14 @@ class JobsList extends Component {
       </div>
     );
   }
+}
+
+JobsList.defaultProps = {
+  ensureLoggedIn: () => null,
+  history: {},
+  location: {},
+  match: {},
+  jobs: []
 }
 
 JobsList.propTypes = {

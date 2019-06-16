@@ -34,7 +34,7 @@ class HomePage extends Component {
           {!localStorage.getItem('token') ? (
             <div className="mt-4 mb-4">
               <Link to={`/login`}>
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-primary" data-testid="login">Login</button>
               </Link>
               <Link to={`/register`}>
                 <button className="btn btn-primary ml-3">Register</button>
@@ -56,6 +56,7 @@ class HomePage extends Component {
 }
 
 HomePage.defaultProps = {
+  ensureLoggedIn: () => null,
   bgImgUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
   logoUrl: "https://res.cloudinary.com/dxklaorw6/image/upload/v1558661557/jobly.png"
 }

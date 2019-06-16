@@ -74,12 +74,18 @@ class LoginForm extends Component {
             />
           </div>
           <div className="form-group">
-            <button className="btn btn-primary">Submit</button>
+            <button className="btn btn-primary" data-testid="submit-btn">Submit</button>
           </div>
         </form>
       </div>
     );
   }
+}
+
+LoginForm.defaultProps = {
+  history: {},
+  location: {},
+  match: {}
 }
 
 LoginForm.propTypes = {

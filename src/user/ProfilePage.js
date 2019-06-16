@@ -78,7 +78,7 @@ class ProfilePage extends Component {
  
   render() {
     return (
-      <div className="text-center">
+      <div className="text-center" data-testid="profile-page-container">
         {this.state.loaded ? this.renderProfileContent() : <div className="mt-5"><Spinner /></div>}
       </div>
     );
@@ -86,6 +86,10 @@ class ProfilePage extends Component {
 }
 
 ProfilePage.defaultProps = {
+  ensureLoggedIn: () => null,
+  history: { push: () => null },
+  location: {},
+  match: {},
   imgDefault: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS32fZtSx6C6gMJGp95NN5O09FtFIphVAeAVg11q8yD33TWA9Fu"
 
 }

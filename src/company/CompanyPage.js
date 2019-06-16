@@ -69,7 +69,7 @@ class CompanyPage extends Component {
 
   render() {
     return (
-      <div className="text-center">
+      <div className="text-center" data-testid="content-container">
         {this.state.loaded ? this.renderContent() : <div><Spinner /></div>}
       </div>
     );
@@ -77,8 +77,13 @@ class CompanyPage extends Component {
 }
 
 CompanyPage.defaultProps = {
+  ensureLoggedIn: () => null,
+  history: {},
+  location: {},
+  match: { params: { handle: "test" } },
   imgDefault: "https://www.designevo.com/res/templates/thumb_small/bright-blue-kaleidoscope.png"
 }
+
 
 CompanyPage.propTypes = {
   ensureLoggedIn: PropTypes.func,
