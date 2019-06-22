@@ -1,6 +1,11 @@
+body {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
 form input {
   height: auto!important;
   padding: 8px!important;
   font-size: 1.2rem!important;
+  background-color: #fff!important;
   border: 1px solid #d8d8d8!important;
 }

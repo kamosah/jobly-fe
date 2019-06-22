@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import './Alert.css';
 
 /**
- * 
+ * *** Alert.js ***
+ * - displays alert card with error message passed as prop
  */
 class Alert extends Component {
   render() {
     return (
-      <div className="alert-card card mb-4 mx-auto">
-        <div className="card-body">
+      <div className="alert-card card mb-4 mx-auto bg-warning">
+        <div className="card-body" data-testid="error">
           {this.props.error}
         </div>
       </div>
@@ -17,8 +18,12 @@ class Alert extends Component {
   }
 }
 
+Alert.defaultProps = {
+  error: "error"
+}
+
 Alert.propTypes = {
-  error: PropTypes.array
+  error: PropTypes.string
 }
 
 export default Alert;

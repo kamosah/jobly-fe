@@ -1,11 +1,17 @@
 import axios from 'axios';
 
 /**
- * 
+ * *** joblyApi.js ***
+ * - helper class to simplify requests to the API
  */
 class JoblyApi {
 
-  /** */
+  /**
+   * request method takes an endpoint, data, and verb
+   * puts together the API call based on what was passed
+   * before making the call, checks user is logged in by appending token
+   * passes data either via query or body depending on verb
+   */
   static async request(endpoint, paramsOrData = {}, verb = "get") {
     console.debug("API Call:", endpoint, paramsOrData, verb);
     paramsOrData._token = localStorage.getItem("token");
@@ -26,7 +32,7 @@ class JoblyApi {
     }
   }
 
-  /** */
+  /** simple method for grabbing data for individual company */
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
     return res.company;

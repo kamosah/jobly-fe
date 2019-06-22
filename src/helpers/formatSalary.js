@@ -1,5 +1,9 @@
 /**
- * 
+ * *** formatSalary.js ***
+ * - simple helper function, takes number and formats to $ string
+ * - 20000 -> "$20,000"
+ * - 120000 -> "$120,000"
+ * - 2220000 -> "$2,220,000"
  */
 function formatSalary(num) {
   let numStr = num.toString();

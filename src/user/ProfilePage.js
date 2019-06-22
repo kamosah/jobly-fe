@@ -37,7 +37,7 @@ class ProfilePage extends Component {
   }
 
   /** */
-  defaultImgOnErr(e) {
+  defaultImgOnErr = (e) => {
     e.target.src = this.props.imgDefault;
   }
 
@@ -55,7 +55,7 @@ class ProfilePage extends Component {
     }
   }
 
-  /** */
+  /** form state change logic */
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -100,8 +100,10 @@ class ProfilePage extends Component {
 ProfilePage.contextType = UserContext;
 
 ProfilePage.defaultProps = {
+  history: { push: () => null },
+  location: {},
+  match: {},
   imgDefault: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS32fZtSx6C6gMJGp95NN5O09FtFIphVAeAVg11q8yD33TWA9Fu"
-
 }
 
 ProfilePage.propTypes = {

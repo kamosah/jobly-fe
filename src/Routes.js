@@ -12,7 +12,8 @@ import JobsList from './job/JobsList';
 import EditProfileForm from './user/EditProfileForm';
 
 /**
- * 
+ * *** Routes.js ***
+ * - component allowing react router functionality
  */
 class Routes extends Component {
   render() {

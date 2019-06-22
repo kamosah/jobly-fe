@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import JoblyApi from '../helpers/joblyApi';
 import UserContext from './UserContext';
+import Alert from '../misc/Alert';
 
+/**
+ * *** EditProfileForm.js ***
+ * - form allowing user to update their information
+ */
 class EditProfileForm extends Component {
   constructor(props) {
     super(props);
@@ -13,9 +19,10 @@ class EditProfileForm extends Component {
       email: "",
       photo_url: "",
       isError: false,
-      error: {}
+      error: null
     }
   }
+  /** when component mounts, query db to get user info */
   async componentDidMount() {
     await this.context();
     try {
@@ -25,10 +32,11 @@ class EditProfileForm extends Component {
       this.setState({ username, first_name, last_name, email, photo_url });
     } catch (e) {
       console.error(e);
-      this.props.history.push('/login');
+      this.setState({ isError: true, error: e });
     }
   }
 
+  /** logic to be run on form submit */
   updateProfile = async (e) => {
     e.preventDefault();
     try {
@@ -38,10 +46,12 @@ class EditProfileForm extends Component {
       this.setState({ editing: false });
       this.props.history.push('/profile');
     } catch (e) {
+      console.error(e);
       this.setState({ isError: true, error: e });
     }
   }
 
+  /** form state change logic */
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -50,7 +60,8 @@ class EditProfileForm extends Component {
     const { first_name, last_name, email, photo_url } = this.state;
     return (
       <div>
-        <h2 className="mt-4 mb-3 text-center">Edit Info</h2>
+        {this.state.isError ? <Alert error={this.state.error} /> : null}
+        <h2 className="mb-3 text-center">Edit Info</h2>
         <form onSubmit={this.updateProfile} className="edit-user-form mb-5 mx-auto">
           <div className="form-group">
             <label htmlFor="first_name">First Name</label>
@@ -97,7 +108,7 @@ class EditProfileForm extends Component {
             />
           </div>
           <div className="form-group">
-            <button className="btn btn-primary mt-1 mb-1 mx-auto">Update</button>
+            <button className="btn btn-primary mt-1 mb-1 mx-auto" data-testid="update-btn">Update</button>
             <br />
             <Link className="btn btn-secondary btn-sm mt-3" to="/profile">Cancel</Link>
           </div>
@@ -108,5 +119,17 @@ class EditProfileForm extends Component {
 }
 
 EditProfileForm.contextType = UserContext;
+
+EditProfileForm.defaultProps = {
+  history: {},
+  location: {},
+  match: {}
+}
+
+EditProfileForm.propTypes = {
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
+}
 
 export default EditProfileForm;

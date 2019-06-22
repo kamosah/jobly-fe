@@ -5,10 +5,12 @@ import './HomePage.css';
 import UserContext from '../user/UserContext';
 
 /**
- * 
+ * *** HomePage.js ***
+ * - main landing page for application
+ * - if not logged in, shows login and register buttons
+ * - if logged in, welcomes user back and shows button for jobs list
  */
 class HomePage extends Component {
-
   /** */
   async componentDidMount() {
     await this.context();
@@ -32,7 +34,7 @@ class HomePage extends Component {
           {!localStorage.getItem('token') ? (
             <div className="mt-4 mb-4">
               <Link to={`/login`}>
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-primary" data-testid="login">Login</button>
               </Link>
               <Link to={`/register`}>
                 <button className="btn btn-primary ml-3">Register</button>
