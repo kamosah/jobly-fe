@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import JoblyApi from '../helpers/joblyApi';
 import Alert from '../misc/Alert';
 import "./LoginForm.css";
+import UserContext from './UserContext';
 
 /**
  * 
@@ -20,7 +21,7 @@ class LoginForm extends Component {
 
   /** */
   handleChange = (e) => {
-    this.props.ensureLoggedIn();
+    this.context();
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -81,8 +82,9 @@ class LoginForm extends Component {
   }
 }
 
+LoginForm.contextType = UserContext;
+
 LoginForm.propTypes = {
-  ensureLoggedIn: PropTypes.func,
   history: PropTypes.object,
   location: PropTypes.object,
   match: PropTypes.object

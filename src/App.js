@@ -4,6 +4,7 @@ import joblyApi from './helpers/joblyApi.js';
 import { decode } from "jsonwebtoken";
 import NavBar from './misc/NavBar';
 import Routes from './Routes';
+import UserContext from './user/UserContext';
 import './App.css';
 
 /**
@@ -41,8 +42,10 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <NavBar loggedIn={this.state.loggedIn} />
-        <Routes ensureLoggedIn={this.ensureLoggedIn} />
+          <UserContext.Provider value={this.ensureLoggedIn}>
+            <NavBar loggedIn={this.state.loggedIn} />
+            <Routes />
+          </UserContext.Provider>
       </BrowserRouter>
     );
   }

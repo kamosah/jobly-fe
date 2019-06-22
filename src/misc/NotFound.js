@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import "./NotFound.css";
+import UserContext from '../user/UserContext';
 
 /**
  * 
@@ -9,7 +10,7 @@ class NotFound extends Component {
 
   /** */
   componentDidMount() {
-    this.props.ensureLoggedIn();
+    this.context();
   }
 
   render() {
@@ -28,8 +29,9 @@ class NotFound extends Component {
   }
 }
 
+NotFound.contextType = UserContext;
+
 NotFound.propTypes = {
-  ensureLoggedIn: PropTypes.func,
   imgUrl: PropTypes.string
 }
 

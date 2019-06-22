@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import JoblyApi from '../helpers/joblyApi';
+import UserContext from './UserContext';
 
 class EditProfileForm extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class EditProfileForm extends Component {
     }
   }
   async componentDidMount() {
-    this.props.ensureLoggedIn();
+    await this.context();
     try {
       let username = localStorage.getItem('username');
       let { user } = await JoblyApi.request(`users/${username}`, {}, 'get');
@@ -105,5 +106,7 @@ class EditProfileForm extends Component {
     );
   }
 }
+
+EditProfileForm.contextType = UserContext;
 
 export default EditProfileForm;

@@ -5,6 +5,7 @@ import JobListItem from './JobListItem';
 import SearchForm from '../misc/SearchForm';
 import Spinner from '../misc/Spinner';
 import './JobsList.css';
+import UserContext from '../user/UserContext';
 
 /**
  * 
@@ -29,7 +30,7 @@ class JobsList extends Component {
    * when data is returned, hide spinner and render list
    */
   async componentDidMount() {
-    this.props.ensureLoggedIn();
+    this.context();
     try {
       // if no props were passed (main list page)
       if (!this.state.jobs.length) {
@@ -150,8 +151,9 @@ class JobsList extends Component {
   }
 }
 
+JobsList.contextType = UserContext;
+
 JobsList.propTypes = {
-  ensureLoggedIn: PropTypes.func,
   history: PropTypes.object,
   location: PropTypes.object,
   match: PropTypes.object

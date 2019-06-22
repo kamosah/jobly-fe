@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import CompaniesList from './company/CompaniesList';
 import CompanyPage from './company/CompanyPage';
@@ -22,54 +21,51 @@ class Routes extends Component {
         <Route
           exact
           path="/companies/:handle"
-          render={(rtProps) => <CompanyPage ensureLoggedIn={this.props.ensureLoggedIn} {...rtProps} />}
+          render={(rtProps) => <CompanyPage {...rtProps} />}
         />
         <Route
           exact
           path="/companies"
-          render={(rtProps) => <CompaniesList ensureLoggedIn={this.props.ensureLoggedIn} {...rtProps} />}
+          render={(rtProps) => <CompaniesList {...rtProps} />}
         />
         <Route
           exact
           path="/register"
-          render={(rtProps) => <RegisterForm {...rtProps} ensureLoggedIn={this.props.ensureLoggedIn} />}
+          render={(rtProps) => <RegisterForm {...rtProps} />}
         />
         <Route
           exact
           path="/edit/profile"
-          render={(rtProps) => <EditProfileForm ensureLoggedIn={this.props.ensureLoggedIn} {...rtProps} />}
+          render={(rtProps) => <EditProfileForm {...rtProps} />}
         />
         <Route
           exact
           path="/profile"
-          render={(rtProps) => <ProfilePage ensureLoggedIn={this.props.ensureLoggedIn} {...rtProps} />}
+          render={(rtProps) => <ProfilePage {...rtProps} />}
         />
         <Route
           exact
           path="/login"
-          render={(rtProps) => <LoginForm {...rtProps} ensureLoggedIn={this.props.ensureLoggedIn} />}
+          render={(rtProps) => <LoginForm {...rtProps} />}
         />
         <Route
           exact
           path="/jobs"
-          render={(rtProps) => <JobsList ensureLoggedIn={this.props.ensureLoggedIn} {...rtProps} />}
+          render={(rtProps) => <JobsList {...rtProps} />}
         />
         <Route
           exact
           path="/"
-          render={() => <HomePage ensureLoggedIn={this.props.ensureLoggedIn} />}
+          render={() => <HomePage />}
         />
         <Route
           exact
-          render={() => <NotFound ensureLoggedIn={this.props.ensureLoggedIn} />}
+          render={() => <NotFound />}
         />
       </Switch>
     );
   }
 }
 
-Routes.propTypes = {
-  ensureLoggedIn: PropTypes.func
-}
 
 export default Routes;

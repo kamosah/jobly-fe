@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import JoblyApi from '../helpers/joblyApi';
 import Alert from '../misc/Alert';
 import "./RegisterForm.css";
+import UserContext from './UserContext';
 
 /**
  * 
@@ -23,8 +24,8 @@ class RegisterForm extends Component {
   }
 
   /** */
-  componentDidMount() {
-    this.props.ensureLoggedIn();
+  async componentDidMount () {
+    await this.context();
   }
 
   /** */
@@ -134,8 +135,9 @@ class RegisterForm extends Component {
   }
 }
 
+RegisterForm.contextType = UserContext;
+
 RegisterForm.propTypes = {
-  ensureLoggedIn: PropTypes.func,
   history: PropTypes.object,
   location: PropTypes.object,
   match: PropTypes.object

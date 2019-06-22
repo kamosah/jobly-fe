@@ -4,6 +4,7 @@ import JoblyApi from '../helpers/joblyApi';
 import JobsList from '../job/JobsList';
 import Spinner from '../misc/Spinner';
 import "./CompanyPage.css"
+import UserContext from '../user/UserContext';
 
 /**
  * 
@@ -19,10 +20,10 @@ class CompanyPage extends Component {
 
   /** */
   async componentDidMount() {
-    this.props.ensureLoggedIn();
+    this.context();
     try {
       let res = await JoblyApi.request(`companies/${this.props.match.params.handle}`, {}, "get");
-      this.props.ensureLoggedIn();
+      await this.context();
       this.setState({ company: res.company, loaded: true });
     } catch (e) {
       console.error(e);
@@ -52,7 +53,7 @@ class CompanyPage extends Component {
           <p className="company-desc">{description}</p>
           <p className="num-employees">Employees: {num_employees}</p>
         </div>
-        <JobsList ensureLoggedIn={this.props.ensureLoggedIn} jobs={jobs} />
+        <JobsList jobs={jobs} />
       </div>
     );
   }
@@ -66,12 +67,13 @@ class CompanyPage extends Component {
   }
 }
 
+CompanyPage.contextType = UserContext;
+
 CompanyPage.defaultProps = {
   imgDefault: "https://www.designevo.com/res/templates/thumb_small/bright-blue-kaleidoscope.png"
 }
 
 CompanyPage.propTypes = {
-  ensureLoggedIn: PropTypes.func,
   history: PropTypes.object,
   location: PropTypes.object,
   match: PropTypes.object,

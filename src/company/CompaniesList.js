@@ -5,6 +5,7 @@ import CompanyListItem from './CompanyListItem';
 import SearchForm from '../misc/SearchForm';
 import Spinner from '../misc/Spinner';
 import "./CompaniesList.css";
+import UserContext from '../user/UserContext';
 
 /**
  *
@@ -29,7 +30,7 @@ class CompaniesList extends Component {
    * when data is returned, hide spinner and render list
    */
   async componentDidMount() {
-    this.props.ensureLoggedIn();
+    await this.context();
     try {
       let { companiesAndCount } = await JoblyApi.request('companies', { offset: this.state.offset, amt: this.state.amt });
       this.setState({ companyList: companiesAndCount[0], howMany: companiesAndCount[1], loaded: true })
@@ -117,8 +118,9 @@ class CompaniesList extends Component {
   }
 }
 
+CompaniesList.contextType = UserContext;
+
 CompaniesList.propTypes = {
-  ensureLoggedIn: PropTypes.func,
   history: PropTypes.object,
   location: PropTypes.object,
   match: PropTypes.object

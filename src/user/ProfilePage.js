@@ -5,6 +5,7 @@ import JoblyApi from '../helpers/joblyApi';
 import JobsList from '../job/JobsList';
 import Spinner from '../misc/Spinner';
 import "./ProfilePage.css";
+import UserContext from './UserContext';
 
 /**
  * 
@@ -22,7 +23,7 @@ class ProfilePage extends Component {
 
   /** */
   async componentDidMount() {
-    this.props.ensureLoggedIn();
+    this.context();
     try {
       let username = localStorage.getItem('username');
       if (!username) this.props.history.push('/login');
@@ -82,7 +83,7 @@ class ProfilePage extends Component {
           <div className="user-info mb-4">{email}</div>
           <Link to='/edit/Profile' className="btn btn-primary btn-sm mb-2" >Edit Info</Link>
         </div>
-        <JobsList jobs={this.state.jobs} ensureLoggedIn={this.props.ensureLoggedIn}/>
+        <JobsList jobs={this.state.jobs} />
       </div>
     );
   }
@@ -96,13 +97,14 @@ class ProfilePage extends Component {
   }
 }
 
+ProfilePage.contextType = UserContext;
+
 ProfilePage.defaultProps = {
   imgDefault: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS32fZtSx6C6gMJGp95NN5O09FtFIphVAeAVg11q8yD33TWA9Fu"
 
 }
 
 ProfilePage.propTypes = {
-  ensureLoggedIn: PropTypes.func,
   history: PropTypes.object,
   location: PropTypes.object,
   match: PropTypes.object,

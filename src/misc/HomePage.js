@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './HomePage.css';
+import UserContext from '../user/UserContext';
 
 /**
  * 
@@ -9,8 +10,8 @@ import './HomePage.css';
 class HomePage extends Component {
 
   /** */
-  componentDidMount() {
-    this.props.ensureLoggedIn();
+  async componentDidMount() {
+    await this.context();
   }
 
   render() {
@@ -52,13 +53,14 @@ class HomePage extends Component {
   }
 }
 
+HomePage.contextType = UserContext;
+
 HomePage.defaultProps = {
   bgImgUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
   logoUrl: "https://res.cloudinary.com/dxklaorw6/image/upload/v1558661557/jobly.png"
 }
 
 HomePage.propTypes = {
-  ensureLoggedIn: PropTypes.func,
   bgImgUrl: PropTypes.string,
   logoUrl: PropTypes.string
 }
