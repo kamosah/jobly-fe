@@ -1,5 +1,7 @@
 import axios from "axios";
 
+// https://git.heroku.com/the-jobly-app-backend/${endpoint}
+
 /**
  * *** joblyApi.js ***
  * - helper class to simplify requests to the API

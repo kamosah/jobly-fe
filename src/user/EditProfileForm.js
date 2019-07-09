@@ -41,8 +41,11 @@ class EditProfileForm extends Component {
     e.preventDefault();
     try {
       const { first_name, last_name, email, photo_url } = this.state;
+      const updated = photo_url ?
+                      { first_name, last_name, email, photo_url } :
+                      { first_name, last_name, email }
       let username = localStorage.getItem('username');
-      await JoblyApi.request(`users/${username}`, { first_name, last_name, email, photo_url }, 'patch');
+      await JoblyApi.request(`users/${username}`, updated, 'patch');
       this.setState({ editing: false });
       this.props.history.push('/profile');
     } catch (e) {
@@ -104,7 +107,7 @@ class EditProfileForm extends Component {
               type="text"
               onChange={this.handleChange}
               name="photo_url"
-              value={photo_url}
+              value={photo_url || ""}
             />
           </div>
           <div className="form-group">
