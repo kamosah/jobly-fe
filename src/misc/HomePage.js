@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import mainLogo from '../img/jobly.png';
 import './HomePage.css';
 import UserContext from '../user/UserContext';
 
 /**
- * *** HomePage.js ***
- * - main landing page for application
- * - if not logged in, shows login and register buttons
- * - if logged in, welcomes user back and shows button for jobs list
+ * main landing page
+ * if not logged in, shows login and register buttons
+ * if logged in, welcomes user back and shows button for jobs list
  */
 class HomePage extends Component {
-  /** */
+
   async componentDidMount() {
     await this.context();
   }
@@ -27,7 +27,7 @@ class HomePage extends Component {
         <div className="home-content text-center mx-auto">
           <img
             className="logo mx-auto"
-            src={this.props.logoUrl}
+            src={mainLogo}
             alt="jobly-logo"
           />
           <p className="slogan mt-1">All the jobs in one, convenient place.</p>
@@ -59,12 +59,10 @@ HomePage.contextType = UserContext;
 
 HomePage.defaultProps = {
   bgImgUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-  logoUrl: "https://res.cloudinary.com/dxklaorw6/image/upload/v1558661557/jobly.png"
 }
 
 HomePage.propTypes = {
-  bgImgUrl: PropTypes.string,
-  logoUrl: PropTypes.string
+  bgImgUrl: PropTypes.string
 }
 
 export default HomePage;

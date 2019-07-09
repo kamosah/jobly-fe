@@ -1,11 +1,8 @@
 import axios from "axios";
+const DATABASE_URL = process.env.NODE_ENV === 'development' ?
+                     'http://localhost:3001/' :
+                     'https://the-jobly-app-backend.herokuapp.com/';
 
-// https://git.heroku.com/the-jobly-app-backend/${endpoint}
-
-/**
- * *** joblyApi.js ***
- * - helper class to simplify requests to the API
- */
 class JoblyApi {
   /**
    * request method takes an endpoint, data, and verb
@@ -19,7 +16,7 @@ class JoblyApi {
     try {
       return (await axios({
         method: verb,
-        url: `https://the-jobly-app-backend.herokuapp.com/${endpoint}`,
+        url: `${DATABASE_URL}${endpoint}`,
         [verb === "get" ? "params" : "data"]: paramsOrData
       })).data;
       // axios sends query string data via the "params" key,

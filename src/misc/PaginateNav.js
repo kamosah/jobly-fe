@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import "./PaginateNav.css";
 
 /**
- * *** PaginateNav.js ***
- * - takes props from parent list component
- * - renders prev and next page buttons, current page, and total pages num
+ * takes props from parent list component
+ * renders prev and next page buttons, current page, and total pages num
  */
 class PaginateNav extends Component {
   render() {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-
 import CompaniesList from './company/CompaniesList';
 import CompanyPage from './company/CompanyPage';
 import RegisterForm from './user/RegisterForm';
@@ -11,10 +10,6 @@ import NotFound from './misc/NotFound';
 import JobsList from './job/JobsList';
 import EditProfileForm from './user/EditProfileForm';
 
-/**
- * *** Routes.js ***
- * - component allowing react router functionality
- */
 class Routes extends Component {
   render() {
     return (
@@ -67,6 +62,5 @@ class Routes extends Component {
     );
   }
 }
-
 
 export default Routes;

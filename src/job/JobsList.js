@@ -8,7 +8,7 @@ import './JobsList.css';
 import UserContext from '../user/UserContext';
 
 /**
- * 
+ * displays list of jobs based on what was queried
  */
 class JobsList extends Component {
   constructor(props) {
@@ -23,12 +23,6 @@ class JobsList extends Component {
     }
   }
 
-  /**
-   * when this component mounts:
-   * if no jobs were passed to the list as props, query the db (first page only)
-   * while querying, spinner is shown as "loaded" in state is false
-   * when data is returned, hide spinner and render list
-   */
   async componentDidMount() {
     this.context();
     try {
@@ -47,7 +41,6 @@ class JobsList extends Component {
     }
   }
 
-  /** query the db for next page of jobs */
   nextPage = async () => {
     let newOffset = this.state.offset + this.state.amt;
     if (newOffset < this.state.howMany) {
@@ -62,7 +55,6 @@ class JobsList extends Component {
     }
   }
 
-  /** query the db for previous page of jobs */
   prevPage = async () => {
     let newOffset = this.state.offset - this.state.amt;
     if (newOffset >= 0) {
@@ -77,14 +69,12 @@ class JobsList extends Component {
     }
   }
 
-  /** search jobs by keyword */
   search = async (data) => {
     this.setState({ loaded: false });
     let { jobs } = await JoblyApi.request('jobs', { search: data.term }, "get");
     this.setState({ jobs: jobs, loaded: true });
   }
 
-  /** */
   handleApply = async (id) => {
     try {
       const username = localStorage.getItem("username");
@@ -97,7 +87,6 @@ class JobsList extends Component {
     }
   }
 
-  /** */
   handleUnapply = async (id) => {
     try {
       const username = localStorage.getItem("username");
@@ -110,7 +99,7 @@ class JobsList extends Component {
     }
   }
 
-  /** render pagination navigation */
+  // render pagination navigation
   renderPaginateNav = () => {
     let prevBtn = this.state.offset - this.state.amt >= 0 ? "btn-primary" : "btn-muted no-click";
     let nextBtn = this.state.offset + this.state.amt < this.state.howMany ? "btn-primary" : "btn-muted no-click";
@@ -124,7 +113,6 @@ class JobsList extends Component {
     );
   }
 
-  /** render list of jobs */
   renderJobList = () => {
     return (
       <ul className="jobs-list mb-5 p-0 mx-auto">

@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import JoblyApi from '../helpers/joblyApi';
 import JobsList from '../job/JobsList';
 import Spinner from '../misc/Spinner';
+import userImg from '../img/user.png';
 import "./ProfilePage.css";
 import UserContext from './UserContext';
 
 /**
- * 
+ * displays user information
+ * username, avatar, name, email, jobs applied to
  */
 class ProfilePage extends Component {
   constructor(props) {
@@ -21,7 +23,6 @@ class ProfilePage extends Component {
     }
   }
 
-  /** */
   async componentDidMount() {
     this.context();
     try {
@@ -36,12 +37,11 @@ class ProfilePage extends Component {
     }
   }
 
-  /** */
+  // if user has no image, render default image
   defaultImgOnErr = (e) => {
-    e.target.src = this.props.imgDefault;
+    e.target.src = userImg;
   }
 
-  /** */
   updateProfile = async (e) => {
     e.preventDefault();
     try {
@@ -55,17 +55,14 @@ class ProfilePage extends Component {
     }
   }
 
-  /** form state change logic */
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  /** */
   editProfile = () => {
     this.setState({ editing: !this.state.editing });
   }
 
-  /** */
   renderProfileContent() {
     const { username, first_name, last_name, email, photo_url, jobs } = this.state;
     return (
@@ -74,7 +71,7 @@ class ProfilePage extends Component {
           <h2 className="mb-3">{username}</h2>
           <img
             className="user-img"
-            src={photo_url ? photo_url : this.props.imgDefault}
+            src={photo_url ? photo_url : userImg}
             alt={first_name}
             onError={this.defaultImgOnErr}
           />
@@ -104,15 +101,13 @@ ProfilePage.contextType = UserContext;
 ProfilePage.defaultProps = {
   history: { push: () => null },
   location: {},
-  match: {},
-  imgDefault: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS32fZtSx6C6gMJGp95NN5O09FtFIphVAeAVg11q8yD33TWA9Fu"
+  match: {}
 }
 
 ProfilePage.propTypes = {
   history: PropTypes.object,
   location: PropTypes.object,
   match: PropTypes.object,
-  imgDefault: PropTypes.string
 }
 
 export default ProfilePage;

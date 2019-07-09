@@ -6,8 +6,7 @@ import "./RegisterForm.css";
 import UserContext from './UserContext';
 
 /**
- * *** RegisterForm.js ***
- * - form allowing a user to register
+ * form allowing a user to register
  */
 class RegisterForm extends Component {
   constructor(props) {
@@ -24,18 +23,14 @@ class RegisterForm extends Component {
     }
   }
 
-  /** */
   async componentDidMount () {
     await this.context();
   }
 
-  /** */
-  /** form state change logic */
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  /** form submit logic */
   handleSubmit = async (e) => {
     e.preventDefault();
     const { username, password, first_name, last_name, email, photo_url } = this.state;

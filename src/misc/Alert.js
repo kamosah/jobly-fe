@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import './Alert.css';
 
 /**
- * *** Alert.js ***
- * - displays alert card with error message passed as prop
+ * displays alert card with error message passed as prop
  */
 class Alert extends Component {
   render() {

@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * *** SearchForm.js ***
- * - form to be displayed at the top of companies list and main jobs list
- * - allows users to search for items via keyword
+ * form to be displayed at the top of companies list and main jobs list
  */
 class SearchForm extends Component {
   constructor(props) {
@@ -12,14 +10,12 @@ class SearchForm extends Component {
     this.state = { term: "" };
   }
 
-  /** form submit logic */
   handleSubmit = (evt) => {
     evt.preventDefault();
     this.props.search(this.state);
     this.setState({ term: "" });
   }
 
-  /** form state change logic */
   handleChange = (evt) => {
     this.setState({
       [evt.target.name]: evt.target.value

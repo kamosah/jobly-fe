@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import companyImg from '../img/company.png';
 import "./CompanyListItem.css"
 
 /**
- * *** CompanyListItem.js ***
- * - displays card for individual company
+ * displays company information in card form
  */
 class CompanyListItem extends Component {
 
-  /** if company has no image, render default image */
+  // if company has no image, render default image
   defaultImgOnErr = (e) => {
-    e.target.src = this.props.imgDefault;
+    e.target.src = companyImg;
   }
 
   render() {
@@ -22,7 +22,7 @@ class CompanyListItem extends Component {
           <div className="col-md-2">
             <img
               className="company-logo mb-2"
-              src={logo_url ? logo_url : this.props.imgDefault}
+              src={logo_url ? logo_url : companyImg}
               alt={handle}
               onError={this.defaultImgOnErr}
             />
@@ -45,16 +45,14 @@ CompanyListItem.defaultProps = {
   description: "description",
   handle: "handle",
   logo_url: "logo_url",
-  name: "name",
-  imgDefault: "https://www.designevo.com/res/templates/thumb_small/bright-blue-kaleidoscope.png"
+  name: "name"
 }
 
 CompanyListItem.propTypes = {
   description: PropTypes.string,
   handle: PropTypes.string,
   logo_url: PropTypes.string,
-  name: PropTypes.string,
-  imgDefault: PropTypes.string
+  name: PropTypes.string
 }
 
 export default CompanyListItem;

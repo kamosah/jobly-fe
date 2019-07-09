@@ -4,13 +4,13 @@ import JoblyApi from '../helpers/joblyApi';
 import JobsList from '../job/JobsList';
 import Spinner from '../misc/Spinner';
 import Alert from '../misc/Alert';
+import companyImg from '../img/company.png';
 import "./CompanyPage.css"
 import UserContext from '../user/UserContext';
 
 /**
- * *** CompanyPage.js ***
- * - queries the db to get all company info for individual company
- * - renders company info and all its job postings
+ * queries the db to get all company info for individual company
+ * renders company info and all its job postings
  */
 class CompanyPage extends Component {
   constructor(props) {
@@ -23,7 +23,6 @@ class CompanyPage extends Component {
     }
   }
 
-  /** when the component mounts, query the db to grab company info */
   async componentDidMount() {
     this.context();
     try {
@@ -36,12 +35,11 @@ class CompanyPage extends Component {
     }
   }
 
-  /** if company has no image, render default image */
+  // if company has no image, render default image
   defaultImgOnErr = (e) => {
-    e.target.src = this.props.imgDefault;
+    e.target.src = companyImg;
   }
-
-  /** render company info */
+  
   renderContent() {
     const { handle, name, logo_url, description, num_employees, jobs } = this.state.company;
     return (
@@ -53,7 +51,7 @@ class CompanyPage extends Component {
               <h2 className="mb-4">{name}</h2>
               <img
                 className="company-page-logo"
-                src={logo_url ? logo_url : this.props.imgDefault}
+                src={logo_url ? logo_url : companyImg}
                 alt={handle}
                 onError={this.defaultImgOnErr}
               />
@@ -79,16 +77,10 @@ class CompanyPage extends Component {
 
 CompanyPage.contextType = UserContext;
 
-CompanyPage.defaultProps = {
-  imgDefault: "https://www.designevo.com/res/templates/thumb_small/bright-blue-kaleidoscope.png"
-}
-
-
 CompanyPage.propTypes = {
   history: PropTypes.object,
   location: PropTypes.object,
-  match: PropTypes.object,
-  imgDefault: PropTypes.string
+  match: PropTypes.object
 }
 
 export default CompanyPage;

@@ -6,8 +6,7 @@ import UserContext from './UserContext';
 import Alert from '../misc/Alert';
 
 /**
- * *** EditProfileForm.js ***
- * - form allowing user to update their information
+ * form allowing user to update their information
  */
 class EditProfileForm extends Component {
   constructor(props) {
@@ -22,7 +21,7 @@ class EditProfileForm extends Component {
       error: null
     }
   }
-  /** when component mounts, query db to get user info */
+  
   async componentDidMount() {
     await this.context();
     try {
@@ -36,7 +35,6 @@ class EditProfileForm extends Component {
     }
   }
 
-  /** logic to be run on form submit */
   updateProfile = async (e) => {
     e.preventDefault();
     try {
@@ -54,7 +52,6 @@ class EditProfileForm extends Component {
     }
   }
 
-  /** form state change logic */
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }

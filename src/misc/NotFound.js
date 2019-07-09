@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import notFoundImg from '../img/404.png';
 import "./NotFound.css";
 import UserContext from '../user/UserContext';
 
 /**
- * *** NotFound.js ***
- * - component to be mounted in case of 404
+ * component to be mounted in case of 404
  */
 class NotFound extends Component {
-  /** */
+
   componentDidMount() {
     this.context();
   }
@@ -19,7 +18,7 @@ class NotFound extends Component {
         <div>
           <img
             className="not-found-img"
-            src={this.props.imgUrl}
+            src={notFoundImg}
             alt="404"
           />
           <h2 data-testid="not-found">Page Not Found</h2>
@@ -30,13 +29,5 @@ class NotFound extends Component {
 }
 
 NotFound.contextType = UserContext;
-
-NotFound.defaultProps = {
-  imgUrl: "https://www.indiefolio.com/assets/img/404/404.png"
-}
-
-NotFound.propTypes = {
-  imgUrl: PropTypes.string
-}
 
 export default NotFound;

@@ -10,9 +10,8 @@ import UserContext from '../user/UserContext';
 import PaginateNav from '../misc/PaginateNav';
 
 /**
- * *** CompaniesList.js ***
- * - queries the db to get companies and renders to page
- * - queries are made on a page by page basis
+ * queries the db to get companies and renders to page
+ * queries are made on a page by page basis (pagination)
  */
 class CompaniesList extends Component {
   constructor(props) {
@@ -29,12 +28,6 @@ class CompaniesList extends Component {
     }
   }
 
-  /**
-   * when this component mounts:
-   * query the db (first page only)
-   * while querying, spinner is shown as "loaded" in state is false
-   * when data is returned, hide spinner and render list
-   */
   async componentDidMount() {
     await this.context();
     try {
@@ -46,7 +39,7 @@ class CompaniesList extends Component {
     }
   }
 
-  /** query the db for next page of companies */
+  // pagination next page
   nextPage = async () => {
     let newOffset = this.state.offset + this.state.amt;
     if (newOffset < this.state.howMany) {
@@ -61,7 +54,7 @@ class CompaniesList extends Component {
     }
   }
 
-  /** query the db for previous page of companies */
+  // pagination prev page
   prevPage = async () => {
     let newOffset = this.state.offset - this.state.amt;
     if (newOffset >= 0) {
@@ -76,14 +69,12 @@ class CompaniesList extends Component {
     }
   }
 
-  /** search companies by keyword */
   search = async (data) => {
     this.setState({ loaded: false });
     let { companies } = await JoblyApi.request('companies', { search: data.term }, "get");
     this.setState({ companies: companies, loaded: true });
   }
 
-  /** render pagination navigation */
   renderPaginateNav = () => {
     let prevBtn = this.state.offset - this.state.amt >= 0 ? "btn-primary" : "btn-muted no-click";
     let nextBtn = this.state.offset + this.state.amt < this.state.howMany ? "btn-primary" : "btn-muted no-click";
@@ -100,7 +91,6 @@ class CompaniesList extends Component {
     );
   }
 
-  /** render list */
   renderCompanyList = () => {
     return (
       <ul className="companies-list mb-5 p-0 mx-auto">

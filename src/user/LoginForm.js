@@ -6,8 +6,7 @@ import "./LoginForm.css";
 import UserContext from './UserContext';
 
 /**
- * *** LoginForm.js ***
- * - form allowing a user to login
+ * form allowing a user to login
  */
 class LoginForm extends Component {
   constructor(props) {
@@ -20,13 +19,11 @@ class LoginForm extends Component {
     }
   }
 
-  /** form state change logic */
   handleChange = (e) => {
     this.context();
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  /** form submit logic */
   handleSubmit = async (e) => {
     e.preventDefault();
     try {

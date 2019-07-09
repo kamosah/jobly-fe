@@ -2,18 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import navLogo from '../img/joblyicon.png';
 import './NavBar.css';
 
 /**
- * *** NavBar.js ***
- * - navigation component
- * - shows jobly logo (link to home page)
- * - if user is logged in: shows jobs, companies, profile, and logout links
- * - if user is not logged in: shows login and register links
+ * if user is logged in: shows jobs, companies, profile, and logout links
+ * if user is not logged in: shows login and register links
  */
 class NavBar extends Component {
 
-  /** logic to be run if user clicks "logout" */
   handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
@@ -29,7 +26,7 @@ class NavBar extends Component {
             <NavLink exact to="/" className="navbar-brand">
               <img
                 className="nav-logo"
-                src={this.props.logoUrl}
+                src={navLogo}
                 alt="jobly-logo-sm"
               />
             </NavLink>
@@ -66,7 +63,7 @@ class NavBar extends Component {
             <NavLink exact to="/" className="navbar-brand">
               <img
                 className="nav-logo"
-                src={this.props.logoUrl}
+                src={navLogo}
                 alt="jobly-logo-sm"
               />
             </NavLink>
@@ -95,13 +92,11 @@ class NavBar extends Component {
 }
 
 NavBar.defaultProps = {
-  loggedIn: false,
-  logoUrl: "https://res.cloudinary.com/dxklaorw6/image/upload/v1558640373/joblyicon.png"
+  loggedIn: false
 }
 
 NavBar.propTypes = {
-  loggedIn: PropTypes.bool,
-  logoUrl: PropTypes.string
+  loggedIn: PropTypes.bool
 }
 
 export default withRouter(NavBar);

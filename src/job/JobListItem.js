@@ -5,8 +5,7 @@ import formatSalary from '../helpers/formatSalary';
 import "./JobListItem.css"
 
 /**
- * *** JobListItem.js ***
- * - displays card for individual job listing via props passed
+ * displays card for individual job listing via props passed
  */
 class JobListItem extends Component {
   constructor(props) {
@@ -18,10 +17,6 @@ class JobListItem extends Component {
     }
   }
 
-  /**
-   * calls handleApply in parent list if "apply" button is clicked
-   * changes applyState
-   */
   apply = async () => {
     try {
       await this.props.handleApply(this.props.id);
@@ -32,10 +27,6 @@ class JobListItem extends Component {
     }
   }
 
-  /**
-   * calls handleUnapply in parent list if "unapply" button is clicked
-   * changes applyState
-   */
   unapply = async () => {
     try {
       this.props.handleUnapply(this.props.id);
