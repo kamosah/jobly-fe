@@ -1,11 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
 /**
  * *** joblyApi.js ***
  * - helper class to simplify requests to the API
  */
 class JoblyApi {
-
   /**
    * request method takes an endpoint, data, and verb
    * puts together the API call based on what was passed
@@ -18,14 +17,13 @@ class JoblyApi {
     try {
       return (await axios({
         method: verb,
-        url: `https://glacial-tor-71447.herokuapp.com/${endpoint}`,
+        url: `https://git.heroku.com/the-jobly-app-backend/${endpoint}`,
         [verb === "get" ? "params" : "data"]: paramsOrData
       })).data;
       // axios sends query string data via the "params" key,
       // and request body data via the "data" key,
       // so the key we need depends on the HTTP verb
-    }
-    catch (err) {
+    } catch (err) {
       console.error("API Error:", err.response);
       let message = err.response.data.message;
       throw Array.isArray(message) ? message : [message];
