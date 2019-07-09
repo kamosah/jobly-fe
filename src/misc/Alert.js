@@ -19,11 +19,11 @@ class Alert extends Component {
 }
 
 Alert.defaultProps = {
-  error: "error"
+  error: { data: "error" }
 }
 
 Alert.propTypes = {
-  error: PropTypes.string
+  error: PropTypes.object
 }
 
 export default Alert;

@@ -1,5 +1,7 @@
 import axios from "axios";
 
+// https://git.heroku.com/the-jobly-app-backend/${endpoint}
+
 /**
  * *** joblyApi.js ***
  * - helper class to simplify requests to the API
@@ -17,7 +19,7 @@ class JoblyApi {
     try {
       return (await axios({
         method: verb,
-        url: `https://git.heroku.com/the-jobly-app-backend/${endpoint}`,
+        url: `http://localhost:3001/${endpoint}`,
         [verb === "get" ? "params" : "data"]: paramsOrData
       })).data;
       // axios sends query string data via the "params" key,

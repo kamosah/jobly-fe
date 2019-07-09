@@ -67,7 +67,7 @@ class ProfilePage extends Component {
 
   /** */
   renderProfileContent() {
-    const { username, first_name, last_name, email, photo_url } = this.state;
+    const { username, first_name, last_name, email, photo_url, jobs } = this.state;
     return (
       <div>
         <div className="user-jumbo jumbotron mt-5 mx-auto p-4 text-center">
@@ -83,7 +83,9 @@ class ProfilePage extends Component {
           <div className="user-info mb-4">{email}</div>
           <Link to='/edit/Profile' className="btn btn-primary btn-sm mb-2" >Edit Info</Link>
         </div>
-        <JobsList jobs={this.state.jobs} />
+        { jobs.length ? (
+          <JobsList jobs={this.state.jobs} />
+        ) : null }
       </div>
     );
   }

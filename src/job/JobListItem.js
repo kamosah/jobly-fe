@@ -84,7 +84,6 @@ JobListItem.defaultProps = {
   equity: 0,
   handleApply: () => null,
   id: 0,
-  name: "name",
   salary: 0,
   state: "state",
   title: "title"
@@ -95,7 +94,6 @@ JobListItem.propTypes = {
   equity: PropTypes.number,
   handleApply: PropTypes.func,
   id: PropTypes.number,
-  name: PropTypes.string,
   salary: PropTypes.number,
   state: PropTypes.string,
   title: PropTypes.string
