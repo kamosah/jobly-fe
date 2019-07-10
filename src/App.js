@@ -7,9 +7,6 @@ import Routes from './Routes';
 import UserContext from './user/UserContext';
 import './App.css';
 
-/**
- * main application component
- */
 class App extends Component {
   constructor(props) {
     super(props);
@@ -26,10 +23,12 @@ class App extends Component {
   ensureLoggedIn = async () => {
     const token = localStorage.getItem("token");
     try {
-      let { username } = decode(token);
-      // grab user from db and save to App state
-      let currentUser = await joblyApi.request(`users/${username}`);
-      this.setState({ currentUser, loggedIn: true });
+      let decoded = decode(token);
+      if (decoded) {
+        // grab user from db and save to App state
+        let currentUser = await joblyApi.request(`users/${decoded.username}`);
+        this.setState({ currentUser, loggedIn: true });
+      }
     } catch (e) {
       console.error(e);
       this.setState({ currentUser: null, loggedIn: false });
@@ -39,6 +38,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(process.env.NODE_ENV)
     return (
       <BrowserRouter>
           <UserContext.Provider value={this.ensureLoggedIn}>
