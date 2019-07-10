@@ -38,7 +38,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(process.env.REACT_APP_DB_URL)
     return (
       <BrowserRouter>
           <UserContext.Provider value={this.ensureLoggedIn}>
