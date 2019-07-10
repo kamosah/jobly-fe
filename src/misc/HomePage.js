@@ -34,7 +34,7 @@ class HomePage extends Component {
           {!localStorage.getItem('token') ? (
             <div className="mt-4 mb-4">
               <Link to={`/login`}>
-                <button className="btn btn-primary" data-testid="login">Login</button>
+                <button className="btn btn-primary">Login</button>
               </Link>
               <Link to={`/register`}>
                 <button className="btn btn-primary ml-3">Register</button>

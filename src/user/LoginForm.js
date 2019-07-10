@@ -72,7 +72,7 @@ class LoginForm extends Component {
             />
           </div>
           <div className="form-group">
-            <button className="btn btn-primary" data-testid="submit-btn">Submit</button>
+            <button className="btn btn-primary">Submit</button>
           </div>
         </form>
       </div>

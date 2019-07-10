@@ -11,7 +11,7 @@ class PaginateNav extends Component {
     return (
       <div className="m-3">
         <button className={`btn ${this.props.prevBtn} btn-sm`} onClick={this.props.prevPage}><i className="fas fa-chevron-left"></i></button>
-        <span className="ml-3 mr-3"><b data-testid="page">{this.props.page}</b> of {this.props.numPages}</span>
+        <span className="ml-3 mr-3"><b>{this.props.page}</b> of {this.props.numPages}</span>
         <button className={`btn ${this.props.nextBtn} btn-sm`} onClick={this.props.nextPage}><i className="fas fa-chevron-right"></i></button>
       </div>
     );

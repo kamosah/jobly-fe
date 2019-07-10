@@ -108,7 +108,7 @@ class EditProfileForm extends Component {
             />
           </div>
           <div className="form-group">
-            <button className="btn btn-primary mt-1 mb-1 mx-auto" data-testid="update-btn">Update</button>
+            <button className="btn btn-primary mt-1 mb-1 mx-auto">Update</button>
             <br />
             <Link className="btn btn-secondary btn-sm mt-3" to="/profile">Cancel</Link>
           </div>

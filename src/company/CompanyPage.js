@@ -68,7 +68,7 @@ class CompanyPage extends Component {
 
   render() {
     return (
-      <div className="text-center" data-testid="content-container">
+      <div className="text-center">
         {this.state.loaded ? this.renderContent() : <div><Spinner /></div>}
       </div>
     );

@@ -103,7 +103,7 @@ class CompaniesList extends Component {
 
   render() {
     return (
-      <div className="text-center" data-testid="companies-list-container">
+      <div className="text-center">
         {this.state.isError ? <Alert error={this.state.error} /> : null}
         {this.state.howMany !== 0 ? (
           <div>

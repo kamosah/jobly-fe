@@ -21,7 +21,7 @@ class NotFound extends Component {
             src={notFoundImg}
             alt="404"
           />
-          <h2 data-testid="not-found">Page Not Found</h2>
+          <h2>Page Not Found</h2>
         </div>
       </div>
     );
