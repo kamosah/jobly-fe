@@ -38,6 +38,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(process.env.NODE_ENV);
     return (
       <BrowserRouter>
           <UserContext.Provider value={this.ensureLoggedIn}>
