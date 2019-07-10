@@ -1,7 +1,5 @@
 import axios from "axios";
-const DATABASE_URL = process.env.NODE_ENV === 'development' ?
-                     'http://localhost:3001/' :
-                     'https://the-jobly-app-backend.herokuapp.com/';
+const DATABASE_URL = process.env.REACT_APP_DB_URL || 'http://localhost:3001/';
 
 class JoblyApi {
   /**
