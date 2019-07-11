@@ -20,7 +20,7 @@ let userObj = {
 };
 
 describe('joblyApi', function() {
-  test('Creates a new user', async (e) => {
+  it('Creates a new user', async (e) => {
     try {
       const { username, first_name, last_name, email } = userObj;
       let { token, newUser } = await JoblyApi.request('users', userObj, 'post');
@@ -33,6 +33,5 @@ describe('joblyApi', function() {
       console.error(e);
     }
   });
-
 
 });

@@ -1,15 +1,17 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
 import CompanyListItem from './CompanyListItem';
 
 describe('Render tests for <CompanyListItem />', () => {
   it('renders appropriate content', () => {
-    const { getByTestId } = render(
-      <BrowserRouter>
+    const { container } = render(
+      <MemoryRouter>
         <CompanyListItem />
-      </BrowserRouter>
+      </MemoryRouter>
     );
-    expect(getByTestId('company-name').textContent).toBe("name");
+    expect(container.querySelector('img').alt).toBe('handle');
+    expect(container.querySelector('h5').textContent).toBe('name');
+    expect(container.querySelector('p').textContent).toBe('description');
   });
 });
